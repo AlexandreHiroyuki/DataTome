@@ -156,15 +156,6 @@ class DataTomeMvAvg {
 
     return *this;
   }
-  DataTomeMvAvg<TypeOfArray> &fill(TypeOfArray fill_value) {
-    for (size_t i = 0; i < _average_counter; i++) {
-      _array[i] = fill_value;
-    }
-
-    _average_sum = fill_value * _average_counter;
-
-    return *this;
-  }
 
   // Partial Average methods
 

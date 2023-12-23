@@ -1,6 +1,6 @@
 {
     "name": "DataTome",
-    "version": "4.4.0",
+    "version": "1.0.0",
     "description": "Data Tome is a C++ library for data analysis and data filtering on IoT devices. Focus on the developer's experience and performance.",
     "keywords": "sensors, input, data, processing, analysis, arduino, library, filter, moving average, smooth",
     "repository": {
