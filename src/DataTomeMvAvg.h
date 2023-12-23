@@ -136,7 +136,7 @@ class DataTomeMvAvg {
 
     for (size_t i = _array_size; i < new_size; i++) _array[i] = 0;
 
-    if (_array_size < new_size) {
+    if (new_size > _array_size) {
       _current_index = new_size - 1;
     } else {
       if (_current_index >= new_size) _current_index = new_size - 1;
