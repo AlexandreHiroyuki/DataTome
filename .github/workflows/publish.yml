@@ -1,0 +1,29 @@
+name: PlatformIO Publish Release
+on:
+  release:
+    types: [released]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # env:
+    #   PIO_USERNAME: ${{ secrets.PIO_USERNAME }}
+    #   PIO_PASSWORD: ${{ secrets.PIO_PASSWORD }}
+    steps:
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install PlatformIO Core
+        run: |
+          python -m pip install --upgrade pip
+          pip install platformio
+      - name: Publish Release
+        run: |
+          pio account login --username ${{ secrets.PIO_USERNAME }} --password ${{ secrets.PIO_PASSWORD }}
+          pio package publish

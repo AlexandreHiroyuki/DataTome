@@ -11,21 +11,17 @@
 
 ## Description
 
-> _Old name: MovingAverage_ArduinoLibrary_
+Data Tome is a C++ library for data analysis and data filtering on IoT devices. Focus on the developer's experience and performance.
 
-Moving Average Plus is a C++ library that implements a moving average on the Arduino platform. Performance and usability are the two focuses I thought of when creating this library, so every improvement tip is welcome. It is useful for filtering noisy data from sensors, for example.
+<!-- This library is listed in the official [Arduino Library Manager](https://www.arduino.cc/reference/en/libraries/movingaverageplus/), and you can also find it at [Arduino Library List](https://www.arduinolibraries.info/libraries/moving-average-plus). -->
 
-This library is listed in the official [Arduino Library Manager](https://www.arduino.cc/reference/en/libraries/movingaverageplus/), and you can also find it at [Arduino Library List](https://www.arduinolibraries.info/libraries/moving-average-plus).
+_**—Recommended Platform—**_ Use the [PlatformIO Registry](https://registry.platformio.org/libraries/alexandrehiroyuki/DataTome) to install the library!
 
-_**—Recommended Platform—**_ Now it's possible to install this library on the [PlatformIO Registry](https://registry.platformio.org/libraries/alexandrehiroyuki/MovingAveragePlus)!
-
-Check our **exclusive** feature, the Partials!
-
-> _[Click here to read more about the Partials Concept](https://alexandrehiroyuki.github.io/DataTomeDocs/docs/category/partials)_
+To avoid duplicating data on smaller samples, _[check the Partials feature](https://alexandrehiroyuki.github.io/DataTomeDocs/docs/category/partials)_!
 
 ## Documentation
 
-This library implements the moving average using a circular array to improve the performance.
+This library calculates statistical functions using a time-series sample implemented with a circular array that improves the performance.
 
 > Online Docs: _[Click here to see the full documentation](https://alexandrehiroyuki.github.io/DataTomeDocs/)_
 >
