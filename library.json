@@ -1,0 +1,43 @@
+{
+    "name": "DataTome",
+    "version": "4.4.0",
+    "description": "Data Tome is a C++ library for data analysis and data filtering on IoT devices. Focus on the developer's experience and performance.",
+    "keywords": "sensors, input, data, processing, analysis, arduino, library, filter, moving average, smooth",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AlexandreHiroyuki/DataTome"
+    },
+    "authors": [
+        {
+            "name": "Alexandre Hiroyuki",
+            "email": "alex.hiroyuki@outlook.com",
+            "url": "https://github.com/AlexandreHiroyuki",
+            "maintainer": true
+        }
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/AlexandreHiroyuki/DataTome",
+    "frameworks": "arduino",
+    "platforms": "*",
+    "headers": [
+        "DataTome.h",
+        "DataTomeMvAvg.h"
+    ],
+    "examples": [
+        {
+            "name": "Basic Print Example",
+            "base": "examples/moving_average_print",
+            "files": [
+                "moving_average_print.ino"
+            ]
+        },
+        {
+            "name": "Partials Concept Example",
+            "base": "examples/partials_example",
+            "files": [
+                "partials_example.ino"
+            ]
+        }
+    ],
+    "srcDir": "src"
+}

@@ -1,0 +1,12 @@
+# Visual Studio project configurations
+.vscode
+/.vs
+
+# Compilation output
+/out
+bin/
+build/
+.idea/
+CMakeSettings.json
+
+.pio/
