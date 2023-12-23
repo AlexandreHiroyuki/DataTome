@@ -1,4 +1,4 @@
-name: PlatformIO CI
+name: PlatformIO Unit Tests
 
 on: [push, pull_request, workflow_call]
 
