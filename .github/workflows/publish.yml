@@ -6,6 +6,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -17,6 +19,4 @@ jobs:
           pip install platformio
       - name: Publish Release
         run: |
-          pio account login --username ${{ secrets.PIO_USERNAME }} --password ${{ secrets.PIO_PASSWORD }}
           pio package publish --type library
-          y
