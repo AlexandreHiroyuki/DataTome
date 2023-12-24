@@ -12,7 +12,7 @@ void tearDown(void) {
 long int data[10] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 
 void test_get_average(void) {
-  DataTomeMvAvg<long int> TestMV(5);
+  DataTomeMvAvg<int, long int> TestMV(5);
 
   TestMV.push(data[0]).push(data[1]).push(data[2]);
 
@@ -23,7 +23,7 @@ void test_get_average(void) {
 }
 
 void test_get_front_n_back_elements(void) {
-  DataTomeMvAvg<long int> TestMV(5);
+  DataTomeMvAvg<int, long int> TestMV(5);
 
   TestMV.push(data[0]).push(data[1]).push(data[2]).push(data[3]).push(data[4]);
 
@@ -32,7 +32,7 @@ void test_get_front_n_back_elements(void) {
 }
 
 void test_get_elements_by_index(void) {
-  DataTomeMvAvg<long int> TestMV(5);
+  DataTomeMvAvg<int, long int> TestMV(5);
 
   TestMV.push(data[0]).push(data[1]).push(data[2]);
 
@@ -45,7 +45,7 @@ void test_get_elements_by_index(void) {
 }
 
 void test_size_n_resize(void) {
-  DataTomeMvAvg<long int> TestMV(5);
+  DataTomeMvAvg<int, long int> TestMV(5);
   size_t expected_size = 5;
   size_t new_expected_size = 10;
 
@@ -69,7 +69,7 @@ void test_size_n_resize(void) {
 }
 
 void test_clear(void) {
-  DataTomeMvAvg<long int> TestMV(5);
+  DataTomeMvAvg<int, long int> TestMV(5);
 
   TestMV.push(data[0]);
 
@@ -80,7 +80,7 @@ void test_clear(void) {
 }
 
 void test_partials(void) {
-  DataTomeMvAvg<long int> TestMV(10);
+  DataTomeMvAvg<int, long int> TestMV(10);
   size_t partial_size = 3;
   size_t data_count = 5;
 

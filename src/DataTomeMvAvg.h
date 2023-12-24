@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cstring>  // memset
 
-template <class TypeOfArray>
+template <class TypeOfArray, class TypeOfSum = TypeOfArray>
 class DataTomeMvAvg {
  private:
   size_t _array_size;
@@ -16,11 +16,11 @@ class DataTomeMvAvg {
   size_t _average_counter;
 
   TypeOfArray *_array;
-  TypeOfArray _average_sum;
+  TypeOfSum _average_sum;
 
   size_t _partial_sums_counter;
-  TypeOfArray *_partial_sums;
-  TypeOfArray *_partial_sum_sizes;
+  TypeOfSum *_partial_sums;
+  size_t *_partial_sum_sizes;
 
   void _next_index() {
     _current_index++;
@@ -36,8 +36,8 @@ class DataTomeMvAvg {
         _array((TypeOfArray *)calloc(size, sizeof(TypeOfArray))),
         _average_sum(0),
         _partial_sums_counter(0),
-        _partial_sums((TypeOfArray *)calloc(1, sizeof(TypeOfArray))),
-        _partial_sum_sizes((TypeOfArray *)calloc(1, sizeof(TypeOfArray))) {}
+        _partial_sums((TypeOfSum *)calloc(1, sizeof(TypeOfSum))),
+        _partial_sum_sizes((size_t *)calloc(1, sizeof(size_t))) {}
 
   // Destructor
   ~DataTomeMvAvg() {
@@ -48,7 +48,7 @@ class DataTomeMvAvg {
 
   // Get Result and Access elements
 
-  DataTomeMvAvg<TypeOfArray> &push(TypeOfArray input) {
+  DataTomeMvAvg<TypeOfArray, TypeOfSum> &push(TypeOfArray input) {
     TypeOfArray last_value = _array[_current_index];
     _average_sum -= last_value;
     _average_sum += input;
@@ -128,7 +128,7 @@ class DataTomeMvAvg {
 
   size_t size() { return _array_size; }
 
-  DataTomeMvAvg<TypeOfArray> &resize(size_t new_size) {
+  DataTomeMvAvg<TypeOfArray, TypeOfSum> &resize(size_t new_size) {
     if (new_size == _array_size) return *this;
 
     _array = static_cast<TypeOfArray *>(
@@ -145,7 +145,7 @@ class DataTomeMvAvg {
     _array_size = new_size;
     return *this;
   }
-  DataTomeMvAvg<TypeOfArray> &clear() {
+  DataTomeMvAvg<TypeOfArray, TypeOfSum> &clear() {
     memset(_array, 0, sizeof(TypeOfArray) * _array_size);
 
     _current_index = 0;
@@ -168,10 +168,10 @@ class DataTomeMvAvg {
     _partial_sums_counter++;
 
     if (_partial_sums_counter > _counter_initial_size) {
-      _partial_sums = static_cast<TypeOfArray *>(
-          realloc(_partial_sums, _partial_sums_counter * sizeof(TypeOfArray)));
-      _partial_sum_sizes = static_cast<TypeOfArray *>(realloc(
-          _partial_sum_sizes, _partial_sums_counter * sizeof(TypeOfArray)));
+      _partial_sums = static_cast<TypeOfSum *>(
+          realloc(_partial_sums, _partial_sums_counter * sizeof(TypeOfSum)));
+      _partial_sum_sizes = static_cast<size_t *>(
+          realloc(_partial_sum_sizes, _partial_sums_counter * sizeof(size_t)));
     }
 
     _partial_sums[_partial_sums_counter - 1] = 0;
