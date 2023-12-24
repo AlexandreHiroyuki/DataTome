@@ -53,11 +53,13 @@ void test_sizeResizeAndPointCount(void) {
   for (size_t i = 0; i < expected_size + 1; i++) {
     TestMV.push(data[i]);
     mock_sum += data[i];
+
+    TEST_ASSERT_EQUAL((i < expected_size) ? i + 1 : expected_size,
+                      TestMV.point_count());
   }
   mock_sum -= data[0];
 
   TEST_ASSERT_EQUAL(expected_size, TestMV.size());
-  TEST_ASSERT_EQUAL(expected_size, TestMV.point_count());
 
   long int old_average = TestMV.get();
   TestMV.resize(new_expected_size);
@@ -101,6 +103,23 @@ void test_partialAverage(void) {
   TEST_ASSERT_EQUAL((mock_sum / partial_size), TestMV.partial_get(partial_id));
 }
 
+void test_partialSizeAndPointCount(void) {
+  DataTomeMvAvg<int, long int> TestMV(10);
+  size_t partial_size = 3;
+  size_t data_count = 5;
+
+  size_t partial_id = TestMV.partial_create(partial_size);
+
+  for (size_t i = 0; i < data_count; i++) {
+    TestMV.push(data[i]);
+    TEST_ASSERT_EQUAL((i < partial_size) ? i + 1 : partial_size,
+                      TestMV.partial_point_count(partial_id));
+  }
+
+  TEST_ASSERT_EQUAL(partial_size, TestMV.partial_size(partial_id));
+  TEST_ASSERT_EQUAL(partial_size, TestMV.partial_point_count(partial_id));
+}
+
 void process() {
   UNITY_BEGIN();
 
@@ -110,6 +129,7 @@ void process() {
   RUN_TEST(test_sizeResizeAndPointCount);
   RUN_TEST(test_clear);
   RUN_TEST(test_partialAverage);
+  RUN_TEST(test_partialSizeAndPointCount);
 
   UNITY_END();
 }
