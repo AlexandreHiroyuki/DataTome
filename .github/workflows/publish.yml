@@ -7,6 +7,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
@@ -17,4 +18,4 @@ jobs:
       - name: Publish Release
         run: |
           pio account login --username ${{ secrets.PIO_USERNAME }} --password ${{ secrets.PIO_PASSWORD }}
-          pio package publish --type library ${{ github.workspace }}
+          pio package publish --type library
