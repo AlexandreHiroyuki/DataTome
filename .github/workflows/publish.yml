@@ -26,4 +26,5 @@ jobs:
       - name: Publish Release
         run: |
           pio account login --username ${{ secrets.PIO_USERNAME }} --password ${{ secrets.PIO_PASSWORD }}
-          pio package publish ${GITHUB_WORKSPACE}
+          ls ${{ github.workspace }}
+          pio package publish ${{ github.workspace }}
