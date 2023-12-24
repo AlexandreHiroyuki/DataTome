@@ -7,9 +7,6 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      PLATFORMIO_CI: true
-      PLATFORMIO_DISABLE_PROGRESSBAR: true
-      PLATFORMIO_NO_ANSI: true
       PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
     steps:
       - uses: actions/checkout@v3
@@ -22,4 +19,4 @@ jobs:
           pip install platformio
       - name: Publish Release
         run: |
-          pio package publish --type library
+          pio package publish --no-interactive --type library
