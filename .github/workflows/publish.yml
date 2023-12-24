@@ -19,3 +19,4 @@ jobs:
         run: |
           pio account login --username ${{ secrets.PIO_USERNAME }} --password ${{ secrets.PIO_PASSWORD }}
           pio package publish --type library
+          y
