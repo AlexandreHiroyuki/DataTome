@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cstring>  // memset
 
-template <class TypeOfArray, class TypeOfSum = TypeOfArray>
+template <typename TypeOfArray, typename TypeOfSum = TypeOfArray>
 class DataTomeMvAvg {
  private:
   size_t _array_size;
@@ -56,9 +56,7 @@ class DataTomeMvAvg {
 
     for (size_t i = 0; i < _partial_sums_counter; i++) {
       _partial_sums[i] += input;
-      _partial_sums[i] -= (_current_index == _partial_sum_sizes[i] - 1)
-                              ? last_value
-                              : (*this)[_partial_sum_sizes[i] - 1];
+      _partial_sums[i] -= (*this)[_partial_sum_sizes[i] - 1];
     }
 
     if (_average_counter < _array_size) {
@@ -106,8 +104,6 @@ class DataTomeMvAvg {
   }
 
   TypeOfArray operator[](size_t index) {
-    if (index > _array_size) return 0;
-
     int final_index = (_current_index - 1) - index;
 
     int check_index = _array_size + final_index;
@@ -119,14 +115,13 @@ class DataTomeMvAvg {
     return _array[final_index];
   }
 
-  TypeOfArray at_index(size_t index) {
-    if (index > _array_size) return 0;
-    return _array[index];
-  }
+  TypeOfArray at_index(size_t index) { return _array[index]; }
 
   // Modify array
 
   size_t size() { return _array_size; }
+
+  size_t point_count() { return _average_counter; }
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &resize(size_t new_size) {
     if (new_size == _array_size) return *this;
@@ -145,6 +140,7 @@ class DataTomeMvAvg {
     _array_size = new_size;
     return *this;
   }
+
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &clear() {
     memset(_array, 0, sizeof(TypeOfArray) * _array_size);
 
@@ -159,7 +155,7 @@ class DataTomeMvAvg {
 
   // Partial Average methods
 
-  size_t create_partial(size_t sum_size) {
+  size_t partial_create(size_t sum_size) {
     if (sum_size > _array_size) {
       sum_size = _array_size;
     }
@@ -185,7 +181,7 @@ class DataTomeMvAvg {
     return _partial_sums_counter - 1;
   }
 
-  TypeOfArray get_partial(size_t id) {
+  TypeOfArray partial_get(size_t id) {
     if (id > _partial_sums_counter) return 0;
 
     if (_average_counter >= _partial_sum_sizes[id])
@@ -193,6 +189,21 @@ class DataTomeMvAvg {
     else
       return _partial_sums[id] /
              ((_average_counter == 0) ? 1 : _average_counter);
+  }
+
+  size_t partial_size(size_t id) {
+    if (id > _partial_sums_counter) return 0;
+
+    return _partial_sum_sizes[id];
+  }
+
+  size_t partial_point_count(size_t id) {
+    if (id > _partial_sums_counter) return 0;
+
+    if (_average_counter >= _partial_sum_sizes[id])
+      return _partial_sum_sizes[id];
+    else
+      return _average_counter;
   }
 };
 

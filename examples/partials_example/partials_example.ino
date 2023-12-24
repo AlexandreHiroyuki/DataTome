@@ -17,8 +17,8 @@ void setup() {
   // Initialize serial interface
   Serial.begin(9600);
 
-  integer_mv_partial_id = integer_mv.create_partial(3);
-  integer_mv_partial_id_2 = integer_mv.create_partial(5);
+  integer_mv_partial_id = integer_mv.partial_create(3);
+  integer_mv_partial_id_2 = integer_mv.partial_create(5);
 }
 
 void loop() {
@@ -39,9 +39,9 @@ void loop() {
   Serial.print(integer_mv.get());
   // Prints the value stored in the partials
   Serial.print(" | p(3): ");
-  Serial.print(integer_mv.get_partial(integer_mv_partial_id));
+  Serial.print(integer_mv.partial_get(integer_mv_partial_id));
   Serial.print(" p(5): ");
-  Serial.println(integer_mv.get_partial(integer_mv_partial_id_2));
+  Serial.println(integer_mv.partial_get(integer_mv_partial_id_2));
 
   delay(1000);
 }
