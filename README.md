@@ -9,6 +9,10 @@
 [![Contributors](https://img.shields.io/github/contributors-anon/AlexandreHiroyuki/DataTome)](https://github.com/AlexandreHiroyuki/DataTome/graphs/contributors)
 [![Top Language](https://img.shields.io/github/languages/top/AlexandreHiroyuki/DataTome)](https://github.com/AlexandreHiroyuki/DataTome)
 
+<p align="center">
+<img src="./docs/icon.png" width="128" height="128" />
+</p>
+
 ## Description
 
 Data Tome is a C++ library for data analysis and data filtering on IoT devices. Focus on the developer's experience and performance.

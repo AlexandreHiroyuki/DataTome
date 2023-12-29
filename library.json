@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
     "name": "DataTome",
     "version": "1.0.1",
     "description": "Data Tome is a C++ library for data analysis and data filtering on IoT devices. Focus on the developer's experience and performance.",
@@ -39,5 +40,10 @@
             ]
         }
     ],
+    "export": {
+        "exclude": [
+            ".github"
+        ]
+    },
     "srcDir": "src"
 }
