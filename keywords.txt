@@ -7,9 +7,11 @@
 #######################################
 
 DataTomeMvAvg	KEYWORD1
+DataTomeAnalysis	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
+# DataTomeMvAvg
 #######################################
 
 push	KEYWORD2
@@ -21,10 +23,22 @@ back	KEYWORD2
 
 atIndex	KEYWORD2
 size	KEYWORD2
+point_count	KEYWORD2
 
 resize	KEYWORD2
 clear	KEYWORD2
-fill	KEYWORD2
 
-create_partial	KEYWORD2
-get_partial	KEYWORD2
+partial_create	KEYWORD2
+partial_get	KEYWORD2
+partial_size	KEYWORD2
+partial_point_count	KEYWORD2
+
+#######################################
+# Methods and Functions (KEYWORD2)
+# DataTomeAnalysis
+#######################################
+
+std	KEYWORD2
+var	KEYWORD2
+partial_var	KEYWORD2
+partial_std	KEYWORD2
