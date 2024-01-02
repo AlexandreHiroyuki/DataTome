@@ -117,11 +117,11 @@ class DataTomeMvAvg {
 
   TypeOfArray at_index(size_t index) { return _array[index]; }
 
-  // Modify array
-
   size_t size() { return _array_size; }
 
   size_t point_count() { return _average_counter; }
+
+  // Modify array
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &resize(size_t new_size) {
     if (new_size == _array_size) return *this;
