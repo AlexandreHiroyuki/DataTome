@@ -22,7 +22,8 @@
     "platforms": "*",
     "headers": [
         "DataTome.h",
-        "DataTomeMvAvg.h"
+        "DataTomeMvAvg.h",
+        "DataTomeAnalysis.h"
     ],
     "examples": [
         {
