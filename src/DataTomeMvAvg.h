@@ -117,7 +117,11 @@ class DataTomeMvAvg {
 
   TypeOfArray at_index(size_t index) { return _array[index]; }
 
-  size_t size() { return _array_size; }
+  size_t size_of_array() { return _array_size; }
+
+  size_t size() { return size_of_array(); }
+
+  size_t size_of_memory() { return _array_size * sizeof(TypeOfArray); }
 
   size_t point_count() { return _average_counter; }
 
@@ -191,10 +195,18 @@ class DataTomeMvAvg {
              ((_average_counter == 0) ? 1 : _average_counter);
   }
 
-  size_t partial_size(size_t id) {
+  size_t partial_size_of_array(size_t id) {
     if (id > _partial_sums_counter) return 0;
 
     return _partial_sum_sizes[id];
+  }
+
+  size_t partial_size(size_t id) { return partial_size_of_array(id); }
+
+  size_t partial_size_of_memory(size_t id) {
+    if (id > _partial_sums_counter) return 0;
+
+    return _partial_sum_sizes[id] * sizeof(TypeOfArray);
   }
 
   size_t partial_point_count(size_t id) {
