@@ -29,7 +29,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     return var;
   }
 
-  TypeOfArray std() { return sqrt(var() / this->size()); }
+  TypeOfArray std() { return sqrt(var() / this->point_count()); }
 
   TypeOfArray partial_var(size_t partial_id) {
     TypeOfArray average = this->partial_get(partial_id);
