@@ -51,15 +51,15 @@ void test_sizeResizeAndPointCount(void) {
   size_t new_expected_size = 10;
   size_t new_expected_memory_size = new_expected_size * sizeof(int);
 
-  long int mock_sum = 0;
+  long int expected_sum = 0;
   for (size_t i = 0; i < expected_size + 1; i++) {
     TestMV.push(data[i]);
-    mock_sum += data[i];
+    expected_sum += data[i];
 
     TEST_ASSERT_EQUAL((i < expected_size) ? i + 1 : expected_size,
                       TestMV.point_count());
   }
-  mock_sum -= data[0];
+  expected_sum -= data[0];
 
   TEST_ASSERT_EQUAL(expected_size, TestMV.size());
   TEST_ASSERT_EQUAL(expected_memory_size, TestMV.size_of_memory());
@@ -72,9 +72,37 @@ void test_sizeResizeAndPointCount(void) {
   TEST_ASSERT_EQUAL(old_average, TestMV.get());
 
   TestMV.push(data[6]);
-  mock_sum += data[6];
+  expected_sum += data[6];
   TEST_ASSERT_EQUAL(expected_size + 1, TestMV.point_count());
-  TEST_ASSERT_EQUAL(mock_sum / 6, TestMV.get());
+  TEST_ASSERT_EQUAL(expected_sum / 6, TestMV.get());
+}
+
+void test_smallerResize(void) {
+  DataTomeMvAvg<int, long int> TestMV(5);
+  size_t expected_size = 5;
+  size_t expected_memory_size = expected_size * sizeof(int);
+  size_t new_expected_size = 3;
+  size_t new_expected_memory_size = new_expected_size * sizeof(int);
+
+  for (size_t i = 0; i < expected_size + 1; i++) {
+    TestMV.push(data[i]);
+
+    TEST_ASSERT_EQUAL((i < expected_size) ? i + 1 : expected_size,
+                      TestMV.point_count());
+  }
+
+  TEST_ASSERT_EQUAL(expected_size, TestMV.size());
+  TEST_ASSERT_EQUAL(expected_memory_size, TestMV.size_of_memory());
+
+  TestMV.resize(new_expected_size);
+  long int expected_sum = 0;
+  for (size_t i = 0; i < new_expected_size; i++) {
+    expected_sum += TestMV.at_index(i);
+  }
+  TEST_ASSERT_EQUAL(new_expected_size, TestMV.size());
+  TEST_ASSERT_EQUAL(new_expected_memory_size, TestMV.size_of_memory());
+  TEST_ASSERT_EQUAL(new_expected_size, TestMV.point_count());
+  TEST_ASSERT_EQUAL(expected_sum / 3, TestMV.get());
 }
 
 void test_clear(void) {
@@ -134,6 +162,7 @@ void process() {
   RUN_TEST(test_getFrontAndBackElements);
   RUN_TEST(test_getElementsByIndex);
   RUN_TEST(test_sizeResizeAndPointCount);
+  RUN_TEST(test_smallerResize);
   RUN_TEST(test_clear);
   RUN_TEST(test_partialAverage);
   RUN_TEST(test_partialSizeAndPointCount);

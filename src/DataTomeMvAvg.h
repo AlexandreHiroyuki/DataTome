@@ -28,7 +28,7 @@ class DataTomeMvAvg {
   }
 
  public:
-  // Constructor
+  /** Constructor **/
   DataTomeMvAvg(size_t size)
       : _array_size(size),
         _current_index(0),
@@ -39,14 +39,14 @@ class DataTomeMvAvg {
         _partial_sums((TypeOfSum *)calloc(1, sizeof(TypeOfSum))),
         _partial_sum_sizes((size_t *)calloc(1, sizeof(size_t))) {}
 
-  // Destructor
+  /** Destructor **/
   ~DataTomeMvAvg() {
     free(_array);
     free(_partial_sums);
     free(_partial_sum_sizes);
   }
 
-  // Get Result and Access elements
+  /** Get Result and Access elements **/
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &push(TypeOfArray input) {
     TypeOfArray last_value = _array[_current_index];
@@ -125,21 +125,25 @@ class DataTomeMvAvg {
 
   size_t point_count() { return _average_counter; }
 
-  // Modify array
+  /** Modify array **/
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &resize(size_t new_size) {
     if (new_size == _array_size) return *this;
+
+    if (new_size < _array_size) {
+      for (size_t i = new_size; i < _array_size; i++) {
+        _average_sum -= _array[i];
+      }
+      if (_average_counter > new_size) _average_counter = new_size;
+      if (_current_index >= new_size) _current_index = new_size - 1;
+    } else {
+      _current_index = new_size - 1;
+    }
 
     _array = static_cast<TypeOfArray *>(
         realloc(_array, new_size * sizeof(TypeOfArray)));
 
     for (size_t i = _array_size; i < new_size; i++) _array[i] = 0;
-
-    if (new_size > _array_size) {
-      _current_index = new_size - 1;
-    } else {
-      if (_current_index >= new_size) _current_index = new_size - 1;
-    }
 
     _array_size = new_size;
     return *this;
@@ -157,7 +161,7 @@ class DataTomeMvAvg {
     return *this;
   }
 
-  // Partial Average methods
+  /** Partial Average methods **/
 
   size_t partial_create(size_t sum_size) {
     if (sum_size > _array_size) {

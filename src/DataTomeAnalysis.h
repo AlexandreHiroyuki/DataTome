@@ -14,9 +14,14 @@
 
 template <typename TypeOfArray, typename TypeOfSum = TypeOfArray>
 class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
- private:
  public:
   DataTomeAnalysis(size_t size) : DataTomeMvAvg<TypeOfArray, TypeOfSum>(size) {}
+
+  /** Aliases **/
+
+  TypeOfArray mean() { return this->get(); }
+
+  /** Proper Methods **/
 
   TypeOfArray var() {
     TypeOfArray average = this->get();
@@ -30,6 +35,16 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
   }
 
   TypeOfArray std() { return sqrt(var() / this->point_count()); }
+
+  /** Partial Methods **/
+
+  /** Aliases **/
+
+  TypeOfArray partial_mean(size_t partial_id) {
+    return this->partial_get(partial_id);
+  }
+
+  /** Proper Methods **/
 
   TypeOfArray partial_var(size_t partial_id) {
     TypeOfArray average = this->partial_get(partial_id);
