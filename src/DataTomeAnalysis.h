@@ -54,7 +54,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     TypeOfArray average = this->partial_get(partial_id);
 
     TypeOfArray var = 0;
-    for (size_t i = 0; i < this->partial_size(partial_id); i++) {
+    for (size_t i = 0; i < this->partial_point_count(partial_id); i++) {
       var += ((*this)[i] - average) * ((*this)[i] - average);
     }
 
@@ -62,7 +62,8 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
   }
 
   TypeOfArray partial_std(size_t partial_id) {
-    return sqrt(partial_var(partial_id) / this->partial_size(partial_id));
+    return sqrt(partial_var(partial_id) /
+                this->partial_point_count(partial_id));
   }
 };
 
