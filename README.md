@@ -30,7 +30,7 @@ This library calculates statistical functions using a time-series sample impleme
 
 > Online Docs: _[Click here to see the full documentation](https://alexandrehiroyuki.github.io/DataTomeDocs/)_
 >
-> GitHub Repository: _[The documentation is coded with docusaurus, and you can visit the repository](https://github.com/AlexandreHiroyuki/DataTomeDocs)_
+> Docs GitHub Repository: _[The documentation is coded with docusaurus, and you can visit the repository](https://github.com/AlexandreHiroyuki/DataTomeDocs)_
 
 ## Contributing
 
