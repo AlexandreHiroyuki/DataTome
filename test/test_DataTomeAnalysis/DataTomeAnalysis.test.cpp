@@ -7,6 +7,17 @@ void tearDown(void) {}  // after test
 
 long int data[10] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 
+void test_minAndMax(void) {
+  DataTomeAnalysis<int, long int> TestMV(10);
+
+  for (size_t i = 0; i < 10; i++) {
+    TestMV.push(data[i]);
+  }
+
+  TEST_ASSERT_EQUAL(data[0], TestMV.min());
+  TEST_ASSERT_EQUAL(data[9], TestMV.max());
+}
+
 void test_getVarianceAndStandardDeviation(void) {
   DataTomeAnalysis<int, long int> TestMV(10);
   size_t data_count = 5;
@@ -31,6 +42,21 @@ void test_getVarianceAndStandardDeviation(void) {
   TEST_ASSERT_EQUAL(mock_var, TestMV.var());
 
   TEST_ASSERT_EQUAL(sqrt(mock_var / data_count), TestMV.std());
+}
+
+void test_partialMinAndMax(void) {
+  DataTomeAnalysis<int, long int> TestMV(10);
+  size_t partial_size = 3;
+  size_t data_count = 5;
+
+  size_t partial_id = TestMV.partial_create(partial_size);
+
+  for (size_t i = 0; i < data_count; i++) {
+    TestMV.push(data[i]);
+  }
+
+  TEST_ASSERT_EQUAL(data[2], TestMV.partial_min(partial_id));
+  TEST_ASSERT_EQUAL(data[4], TestMV.partial_max(partial_id));
 }
 
 void test_partialVarianceAndStandardDeviation(void) {
@@ -66,7 +92,9 @@ void test_partialVarianceAndStandardDeviation(void) {
 void process() {
   UNITY_BEGIN();
 
+  RUN_TEST(test_minAndMax);
   RUN_TEST(test_getVarianceAndStandardDeviation);
+  RUN_TEST(test_partialMinAndMax);
   RUN_TEST(test_partialVarianceAndStandardDeviation);
 
   UNITY_END();

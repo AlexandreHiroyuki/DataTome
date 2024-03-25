@@ -24,6 +24,24 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
   /** Proper Methods **/
 
+  TypeOfArray min() {
+    TypeOfArray min = (*this)[0];
+    for (size_t i = 1; i < this->point_count(); i++) {
+      if ((*this)[i] < min) min = (*this)[i];
+    }
+
+    return min;
+  }
+
+  TypeOfArray max() {
+    TypeOfArray max = (*this)[0];
+    for (size_t i = 1; i < this->point_count(); i++) {
+      if ((*this)[i] > max) max = (*this)[i];
+    }
+
+    return max;
+  }
+
   TypeOfArray var() {
     TypeOfArray average = this->get();
 
@@ -49,6 +67,24 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
   }
 
   /** Proper Methods **/
+
+  TypeOfArray partial_min(size_t partial_id) {
+    TypeOfArray min = (*this)[0];
+    for (size_t i = 1; i < this->partial_point_count(partial_id); i++) {
+      if ((*this)[i] < min) min = (*this)[i];
+    }
+
+    return min;
+  }
+
+  TypeOfArray partial_max(size_t partial_id) {
+    TypeOfArray max = (*this)[0];
+    for (size_t i = 1; i < this->partial_point_count(partial_id); i++) {
+      if ((*this)[i] > max) max = (*this)[i];
+    }
+
+    return max;
+  }
 
   TypeOfArray partial_var(size_t partial_id) {
     TypeOfArray average = this->partial_get(partial_id);
