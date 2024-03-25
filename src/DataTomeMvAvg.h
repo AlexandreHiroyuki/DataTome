@@ -71,7 +71,10 @@ class DataTomeMvAvg {
   TypeOfArray get() {
     return (_average_sum / ((_average_counter == 0) ? 1 : _average_counter));
   }
-  TypeOfArray get(size_t n_points) { return get_by_brute(n_points); }
+  TypeOfArray get(size_t n_points) {
+    // @alias get_by_brute
+    return get_by_brute(n_points);
+  }
 
   TypeOfArray get_by_brute(size_t n_points) {
     if (n_points > _average_counter) n_points = _average_counter;
@@ -127,18 +130,10 @@ class DataTomeMvAvg {
 
   /** Modify array **/
 
-  DataTomeMvAvg<TypeOfArray, TypeOfSum> &resize(size_t new_size) {
-    if (new_size == _array_size) return *this;
+  DataTomeMvAvg<TypeOfArray, TypeOfSum> &grow(size_t new_size) {
+    if (new_size <= _array_size) return *this;
 
-    if (new_size < _array_size) {
-      for (size_t i = new_size; i < _array_size; i++) {
-        _average_sum -= _array[i];
-      }
-      if (_average_counter > new_size) _average_counter = new_size;
-      if (_current_index >= new_size) _current_index = new_size - 1;
-    } else {
-      _current_index = new_size - 1;
-    }
+    _current_index = new_size - 1;
 
     _array = static_cast<TypeOfArray *>(
         realloc(_array, new_size * sizeof(TypeOfArray)));
@@ -147,6 +142,10 @@ class DataTomeMvAvg {
 
     _array_size = new_size;
     return *this;
+  }
+  DataTomeMvAvg<TypeOfArray, TypeOfSum> &resize(size_t new_size) {
+    // @alias grow
+    return grow(new_size);
   }
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &clear() {

@@ -44,7 +44,7 @@ void test_getElementsByIndex(void) {
   TEST_ASSERT_EQUAL(data[2], TestMV.at_index(2));
 }
 
-void test_sizeResizeAndPointCount(void) {
+void test_sizeGrowAndPointCount(void) {
   DataTomeMvAvg<int, long int> TestMV(5);
   size_t expected_size = 5;
   size_t expected_memory_size = expected_size * sizeof(int);
@@ -65,7 +65,7 @@ void test_sizeResizeAndPointCount(void) {
   TEST_ASSERT_EQUAL(expected_memory_size, TestMV.size_of_memory());
 
   long int old_average = TestMV.get();
-  TestMV.resize(new_expected_size);
+  TestMV.grow(new_expected_size);
   TEST_ASSERT_EQUAL(new_expected_size, TestMV.size());
   TEST_ASSERT_EQUAL(new_expected_memory_size, TestMV.size_of_memory());
   TEST_ASSERT_EQUAL(expected_size, TestMV.point_count());
@@ -77,12 +77,11 @@ void test_sizeResizeAndPointCount(void) {
   TEST_ASSERT_EQUAL(expected_sum / 6, TestMV.get());
 }
 
-void test_smallerResize(void) {
+void test_smallerGrow(void) {
   DataTomeMvAvg<int, long int> TestMV(5);
   size_t expected_size = 5;
   size_t expected_memory_size = expected_size * sizeof(int);
-  size_t new_expected_size = 3;
-  size_t new_expected_memory_size = new_expected_size * sizeof(int);
+  size_t new_unexpected_size = 3;
 
   for (size_t i = 0; i < expected_size + 1; i++) {
     TestMV.push(data[i]);
@@ -94,15 +93,11 @@ void test_smallerResize(void) {
   TEST_ASSERT_EQUAL(expected_size, TestMV.size());
   TEST_ASSERT_EQUAL(expected_memory_size, TestMV.size_of_memory());
 
-  TestMV.resize(new_expected_size);
-  long int expected_sum = 0;
-  for (size_t i = 0; i < new_expected_size; i++) {
-    expected_sum += TestMV.at_index(i);
-  }
-  TEST_ASSERT_EQUAL(new_expected_size, TestMV.size());
-  TEST_ASSERT_EQUAL(new_expected_memory_size, TestMV.size_of_memory());
-  TEST_ASSERT_EQUAL(new_expected_size, TestMV.point_count());
-  TEST_ASSERT_EQUAL(expected_sum / 3, TestMV.get());
+  TestMV.grow(new_unexpected_size);
+
+  TEST_ASSERT_EQUAL(expected_size, TestMV.size());
+  TEST_ASSERT_EQUAL(expected_memory_size, TestMV.size_of_memory());
+  TEST_ASSERT_EQUAL(expected_size, TestMV.point_count());
 }
 
 void test_clear(void) {
@@ -161,8 +156,8 @@ void process() {
   RUN_TEST(test_getAverage);
   RUN_TEST(test_getFrontAndBackElements);
   RUN_TEST(test_getElementsByIndex);
-  RUN_TEST(test_sizeResizeAndPointCount);
-  RUN_TEST(test_smallerResize);
+  RUN_TEST(test_sizeGrowAndPointCount);
+  RUN_TEST(test_smallerGrow);
   RUN_TEST(test_clear);
   RUN_TEST(test_partialAverage);
   RUN_TEST(test_partialSizeAndPointCount);

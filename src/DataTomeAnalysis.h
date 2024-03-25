@@ -20,6 +20,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
   /** Aliases **/
 
   TypeOfArray mean() { return this->get(); }
+  size_t count() { return this->point_count(); }
 
   /** Proper Methods **/
 
@@ -42,6 +43,9 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
   TypeOfArray partial_mean(size_t partial_id) {
     return this->partial_get(partial_id);
+  }
+  size_t partial_count(size_t partial_id) {
+    return this->partial_size(partial_id);
   }
 
   /** Proper Methods **/
