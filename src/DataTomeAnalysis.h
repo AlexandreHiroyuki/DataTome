@@ -9,6 +9,7 @@
 
 #include <DataTomeMvAvg.h>
 
+#include <algorithm>
 #include <cmath>
 #include <cstdlib>
 
@@ -40,6 +41,30 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     }
 
     return max;
+  }
+
+  TypeOfArray median() {
+    TypeOfArray median = 0;
+    size_t current_size = this->point_count();
+
+    TypeOfArray *temp =
+        (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
+
+    for (size_t i = 0; i < current_size; i++) {
+      temp[i] = this->at_index(i);
+    }
+
+    std::sort(temp, temp + current_size);
+
+    if (current_size % 2 == 0) {
+      median = (temp[current_size / 2 - 1] + temp[current_size / 2]) / 2;
+    } else {
+      median = temp[current_size / 2];
+    }
+
+    free(temp);
+
+    return median;
   }
 
   TypeOfArray var() {
@@ -84,6 +109,30 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     }
 
     return max;
+  }
+
+  TypeOfArray partial_median(size_t partial_id) {
+    TypeOfArray median = 0;
+    size_t current_size = this->partial_point_count(partial_id);
+
+    TypeOfArray *temp =
+        (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
+
+    for (size_t i = 0; i < current_size; i++) {
+      temp[i] = (*this)[i];
+    }
+
+    std::sort(temp, temp + current_size);
+
+    if (current_size % 2 == 0) {
+      median = (temp[current_size / 2 - 1] + temp[current_size / 2]) / 2;
+    } else {
+      median = temp[current_size / 2];
+    }
+
+    free(temp);
+
+    return median;
   }
 
   TypeOfArray partial_var(size_t partial_id) {
