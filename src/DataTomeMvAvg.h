@@ -28,7 +28,7 @@ class DataTomeMvAvg {
   }
 
  public:
-  // Constructor
+  /** Constructor **/
   DataTomeMvAvg(size_t size)
       : _array_size(size),
         _current_index(0),
@@ -39,14 +39,14 @@ class DataTomeMvAvg {
         _partial_sums((TypeOfSum *)calloc(1, sizeof(TypeOfSum))),
         _partial_sum_sizes((size_t *)calloc(1, sizeof(size_t))) {}
 
-  // Destructor
+  /** Destructor **/
   ~DataTomeMvAvg() {
     free(_array);
     free(_partial_sums);
     free(_partial_sum_sizes);
   }
 
-  // Get Result and Access elements
+  /** Get Result and Access elements **/
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &push(TypeOfArray input) {
     TypeOfArray last_value = _array[_current_index];
@@ -71,7 +71,10 @@ class DataTomeMvAvg {
   TypeOfArray get() {
     return (_average_sum / ((_average_counter == 0) ? 1 : _average_counter));
   }
-  TypeOfArray get(size_t n_points) { return get_by_brute(n_points); }
+  TypeOfArray get(size_t n_points) {
+    // @alias get_by_brute
+    return get_by_brute(n_points);
+  }
 
   TypeOfArray get_by_brute(size_t n_points) {
     if (n_points > _average_counter) n_points = _average_counter;
@@ -117,28 +120,32 @@ class DataTomeMvAvg {
 
   TypeOfArray at_index(size_t index) { return _array[index]; }
 
-  size_t size() { return _array_size; }
+  size_t size_of_array() { return _array_size; }
+
+  size_t size() { return size_of_array(); }
+
+  size_t size_of_memory() { return _array_size * sizeof(TypeOfArray); }
 
   size_t point_count() { return _average_counter; }
 
-  // Modify array
+  /** Modify array **/
 
-  DataTomeMvAvg<TypeOfArray, TypeOfSum> &resize(size_t new_size) {
-    if (new_size == _array_size) return *this;
+  DataTomeMvAvg<TypeOfArray, TypeOfSum> &grow(size_t new_size) {
+    if (new_size <= _array_size) return *this;
+
+    _current_index = new_size - 1;
 
     _array = static_cast<TypeOfArray *>(
         realloc(_array, new_size * sizeof(TypeOfArray)));
 
     for (size_t i = _array_size; i < new_size; i++) _array[i] = 0;
 
-    if (new_size > _array_size) {
-      _current_index = new_size - 1;
-    } else {
-      if (_current_index >= new_size) _current_index = new_size - 1;
-    }
-
     _array_size = new_size;
     return *this;
+  }
+  DataTomeMvAvg<TypeOfArray, TypeOfSum> &resize(size_t new_size) {
+    // @alias grow
+    return grow(new_size);
   }
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &clear() {
@@ -153,7 +160,7 @@ class DataTomeMvAvg {
     return *this;
   }
 
-  // Partial Average methods
+  /** Partial Average methods **/
 
   size_t partial_create(size_t sum_size) {
     if (sum_size > _array_size) {
@@ -191,10 +198,18 @@ class DataTomeMvAvg {
              ((_average_counter == 0) ? 1 : _average_counter);
   }
 
-  size_t partial_size(size_t id) {
+  size_t partial_size_of_array(size_t id) {
     if (id > _partial_sums_counter) return 0;
 
     return _partial_sum_sizes[id];
+  }
+
+  size_t partial_size(size_t id) { return partial_size_of_array(id); }
+
+  size_t partial_size_of_memory(size_t id) {
+    if (id > _partial_sums_counter) return 0;
+
+    return _partial_sum_sizes[id] * sizeof(TypeOfArray);
   }
 
   size_t partial_point_count(size_t id) {
