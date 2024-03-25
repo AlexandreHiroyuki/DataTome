@@ -21,6 +21,7 @@ Data Tome is a C++ library for data analysis and data filtering on IoT devices. 
 
 - This library is listed in the official [Arduino Library Manager](https://www.arduino.cc/reference/en/libraries/datatome/).
 - _**—Recommended Platform—**_ Use the [PlatformIO Registry](https://registry.platformio.org/libraries/alexandrehiroyuki/DataTome) to install the library!
+- You can see the source code at the [GitHub Repository](https://github.com/AlexandreHiroyuki/DataTome).
 - To avoid duplicating data for smaller samples of the same data, _[check the Partials feature](https://alexandrehiroyuki.github.io/DataTomeDocs/docs/category/partials)_!
 
 ## Documentation
