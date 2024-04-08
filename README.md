@@ -17,11 +17,12 @@
 
 Data Tome is a C++ library for data analysis and data filtering on IoT devices. Focus on the developer's experience and performance.
 
-This library is listed in the official [Arduino Library Manager](https://www.arduino.cc/reference/en/libraries/datatome/).
+## Getting Started
 
-_**—Recommended Platform—**_ Use the [PlatformIO Registry](https://registry.platformio.org/libraries/alexandrehiroyuki/DataTome) to install the library!
-
-To avoid duplicating data for smaller samples of the same data, _[check the Partials feature](https://alexandrehiroyuki.github.io/DataTomeDocs/docs/category/partials)_!
+- This library is listed in the official [Arduino Library Manager](https://www.arduino.cc/reference/en/libraries/datatome/).
+- _**—Recommended Platform—**_ Use the [PlatformIO Registry](https://registry.platformio.org/libraries/alexandrehiroyuki/DataTome) to install the library!
+- You can see the source code at the [GitHub Repository](https://github.com/AlexandreHiroyuki/DataTome).
+- To avoid duplicating data for smaller samples of the same data, _[check the Partials feature](https://alexandrehiroyuki.github.io/DataTomeDocs/docs/category/partials)_!
 
 ## Documentation
 
@@ -29,7 +30,7 @@ This library calculates statistical functions using a time-series sample impleme
 
 > Online Docs: _[Click here to see the full documentation](https://alexandrehiroyuki.github.io/DataTomeDocs/)_
 >
-> GitHub Repository: _[The documentation is coded with docusaurus, and you can visit the repository](https://github.com/AlexandreHiroyuki/DataTomeDocs)_
+> Docs GitHub Repository: _[The documentation is coded with docusaurus, and you can visit the repository](https://github.com/AlexandreHiroyuki/DataTomeDocs)_
 
 ## Contributing
 
