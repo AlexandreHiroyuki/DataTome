@@ -1,8 +1,11 @@
 .DS_Store
 
 # Visual Studio project configurations
-.vscode
+.vscode/*
 /.vs
+
+!.vscode/settings.json
+!.vscode/extensions.json
 
 # Compilation output
 /out
