@@ -5,7 +5,7 @@
 [![Latest Release Date](https://img.shields.io/github/release-date/AlexandreHiroyuki/DataTome)](https://github.com/AlexandreHiroyuki/DataTome/releases)
 [![Last Commit Date](https://img.shields.io/github/last-commit/AlexandreHiroyuki/DataTome)](https://github.com/AlexandreHiroyuki/DataTome/commits/master)
 
-[![GitHub Stars](https://img.shields.io/github/stars/AlexandreHiroyuki/DataTome?color=yellow)](https://github.com/AlexandreHiroyuki/DataTome/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/AlexandreHiroyuki/DataTome?style=flat&color=yellow)](https://github.com/AlexandreHiroyuki/DataTome/stargazers)
 [![Contributors](https://img.shields.io/github/contributors-anon/AlexandreHiroyuki/DataTome)](https://github.com/AlexandreHiroyuki/DataTome/graphs/contributors)
 [![Top Language](https://img.shields.io/github/languages/top/AlexandreHiroyuki/DataTome)](https://github.com/AlexandreHiroyuki/DataTome)
 
