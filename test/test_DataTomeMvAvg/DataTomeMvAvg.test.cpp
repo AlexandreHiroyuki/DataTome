@@ -159,6 +159,7 @@ void process() {
   RUN_TEST(test_sizeGrowAndPointCount);
   RUN_TEST(test_smallerGrow);
   RUN_TEST(test_clear);
+  
   RUN_TEST(test_partialAverage);
   RUN_TEST(test_partialSizeAndPointCount);
 

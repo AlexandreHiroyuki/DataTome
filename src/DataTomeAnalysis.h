@@ -67,6 +67,37 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     return median;
   }
 
+  TypeOfArray lowest_mode() {
+    TypeOfArray mode = 0;
+    size_t current_size = this->point_count();
+
+    TypeOfArray *temp =
+        (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
+
+    for (size_t i = 0; i < current_size; i++) {
+      temp[i] = this->at_index(i);
+    }
+
+    std::sort(temp, temp + current_size);
+
+    size_t max_count = 0;
+    for (size_t i = 0; i < current_size; i++) {
+      size_t count = 0;
+      for (size_t j = 0; j < current_size; j++) {
+        if (temp[j] == temp[i]) count++;
+      }
+
+      if (count > max_count) {
+        max_count = count;
+        mode = temp[i];
+      }
+    }
+
+    free(temp);
+
+    return mode;
+  }
+
   TypeOfArray var() {
     TypeOfArray average = this->get();
 
@@ -133,6 +164,37 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     free(temp);
 
     return median;
+  }
+
+  TypeOfArray partial_lowest_mode(size_t partial_id) {
+    TypeOfArray mode = 0;
+    size_t current_size = this->partial_point_count(partial_id);
+
+    TypeOfArray *temp =
+        (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
+
+    for (size_t i = 0; i < current_size; i++) {
+      temp[i] = (*this)[i];
+    }
+
+    std::sort(temp, temp + current_size);
+
+    size_t max_count = 0;
+    for (size_t i = 0; i < current_size; i++) {
+      size_t count = 0;
+      for (size_t j = 0; j < current_size; j++) {
+        if (temp[j] == temp[i]) count++;
+      }
+
+      if (count > max_count) {
+        max_count = count;
+        mode = temp[i];
+      }
+    }
+
+    free(temp);
+
+    return mode;
   }
 
   TypeOfArray partial_var(size_t partial_id) {
