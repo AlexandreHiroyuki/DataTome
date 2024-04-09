@@ -133,7 +133,6 @@ void test_partialAverage(void) {
 void test_partialSizeAndPointCount(void) {
   DataTomeMvAvg<int, long int> TestMV(10);
   size_t partial_size = 3;
-  size_t partial_memory_size = partial_size * sizeof(int);
   size_t data_count = 5;
 
   size_t partial_id = TestMV.partial_create(partial_size);
@@ -145,8 +144,6 @@ void test_partialSizeAndPointCount(void) {
   }
 
   TEST_ASSERT_EQUAL(partial_size, TestMV.partial_size(partial_id));
-  TEST_ASSERT_EQUAL(partial_memory_size,
-                    TestMV.partial_size_of_memory(partial_id));
   TEST_ASSERT_EQUAL(partial_size, TestMV.partial_point_count(partial_id));
 }
 
@@ -159,7 +156,7 @@ void process() {
   RUN_TEST(test_sizeGrowAndPointCount);
   RUN_TEST(test_smallerGrow);
   RUN_TEST(test_clear);
-  
+
   RUN_TEST(test_partialAverage);
   RUN_TEST(test_partialSizeAndPointCount);
 
