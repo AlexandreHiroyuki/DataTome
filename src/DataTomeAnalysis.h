@@ -50,9 +50,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     TypeOfArray *temp =
         (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
 
-    for (size_t i = 0; i < current_size; i++) {
-      temp[i] = this->at_index(i);
-    }
+    memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
 
     std::sort(temp, temp + current_size);
 
@@ -68,28 +66,67 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
   }
 
   TypeOfArray lowest_mode() {
-    TypeOfArray mode = 0;
     size_t current_size = this->point_count();
 
     TypeOfArray *temp =
         (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
 
-    for (size_t i = 0; i < current_size; i++) {
-      temp[i] = this->at_index(i);
-    }
+    memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
 
     std::sort(temp, temp + current_size);
 
     size_t max_count = 0;
+    TypeOfArray mode = temp[0];
+
+    size_t count = 0;
+    TypeOfArray current_number = temp[0];
+
     for (size_t i = 0; i < current_size; i++) {
-      size_t count = 0;
-      for (size_t j = 0; j < current_size; j++) {
-        if (temp[j] == temp[i]) count++;
+      if (temp[i] == current_number) {
+        count++;
+      } else {
+        current_number = temp[i];
+        count = 1;
       }
 
       if (count > max_count) {
         max_count = count;
-        mode = temp[i];
+        mode = current_number;
+      }
+    }
+
+    free(temp);
+
+    return mode;
+  }
+
+  TypeOfArray highest_mode() {
+    size_t current_size = this->point_count();
+
+    TypeOfArray *temp =
+        (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
+
+    memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
+
+    std::sort(temp, temp + current_size);
+
+    size_t max_count = 0;
+    TypeOfArray mode = temp[0];
+
+    size_t count = 0;
+    TypeOfArray current_number = temp[0];
+
+    for (size_t i = 0; i < current_size; i++) {
+      if (temp[i] == current_number) {
+        count++;
+      } else {
+        current_number = temp[i];
+        count = 1;
+      }
+
+      if (count >= max_count) {
+        max_count = count;
+        mode = current_number;
       }
     }
 
@@ -167,7 +204,6 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
   }
 
   TypeOfArray partial_lowest_mode(size_t partial_id) {
-    TypeOfArray mode = 0;
     size_t current_size = this->partial_point_count(partial_id);
 
     TypeOfArray *temp =
@@ -180,15 +216,59 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     std::sort(temp, temp + current_size);
 
     size_t max_count = 0;
+    TypeOfArray mode = temp[0];
+
+    size_t count = 0;
+    TypeOfArray current_number = temp[0];
+
     for (size_t i = 0; i < current_size; i++) {
-      size_t count = 0;
-      for (size_t j = 0; j < current_size; j++) {
-        if (temp[j] == temp[i]) count++;
+      if (temp[i] == current_number) {
+        count++;
+      } else {
+        current_number = temp[i];
+        count = 1;
       }
 
       if (count > max_count) {
         max_count = count;
-        mode = temp[i];
+        mode = current_number;
+      }
+    }
+
+    free(temp);
+
+    return mode;
+  }
+
+  TypeOfArray partial_highest_mode(size_t partial_id) {
+    size_t current_size = this->partial_point_count(partial_id);
+
+    TypeOfArray *temp =
+        (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
+
+    for (size_t i = 0; i < current_size; i++) {
+      temp[i] = (*this)[i];
+    }
+
+    std::sort(temp, temp + current_size);
+
+    size_t max_count = 0;
+    TypeOfArray mode = temp[0];
+
+    size_t count = 0;
+    TypeOfArray current_number = temp[0];
+
+    for (size_t i = 0; i < current_size; i++) {
+      if (temp[i] == current_number) {
+        count++;
+      } else {
+        current_number = temp[i];
+        count = 1;
+      }
+
+      if (count >= max_count) {
+        max_count = count;
+        mode = current_number;
       }
     }
 

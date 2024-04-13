@@ -7,7 +7,7 @@ void tearDown(void) {}  // after test
 
 long int data[10] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 
-long int mode_data[10] = {1, 1, 2, 3, 3, 3, 3, 4, 4, 5};
+long int mode_data[10] = {1, 2, 3, 3, 3, 3, 4, 4, 4, 4};
 
 void test_minAndMax(void) {
   DataTomeAnalysis<int, long int> TestAnalysis(10);
@@ -38,6 +38,16 @@ void test_lowestMode(void) {
   }
 
   TEST_ASSERT_EQUAL(3, TestAnalysis.lowest_mode());
+}
+
+void test_highestMode(void) {
+  DataTomeAnalysis<int, long int> TestAnalysis(10);
+
+  for (size_t i = 0; i < 10; i++) {
+    TestAnalysis.push(mode_data[i]);
+  }
+
+  TEST_ASSERT_EQUAL(4, TestAnalysis.highest_mode());
 }
 
 void test_getVarianceAndStandardDeviation(void) {
@@ -106,7 +116,21 @@ void test_partialLowestMode(void) {
     TestAnalysis.push(mode_data[i]);
   }
 
-  TEST_ASSERT_EQUAL(1, TestAnalysis.partial_lowest_mode(partial_id));
+  TEST_ASSERT_EQUAL(3, TestAnalysis.partial_lowest_mode(partial_id));
+}
+
+void test_partialHighestMode(void) {
+  DataTomeAnalysis<int, long int> TestAnalysis(10);
+  size_t partial_size = 5;
+  size_t data_count = 10;
+
+  size_t partial_id = TestAnalysis.partial_create(partial_size);
+
+  for (size_t i = 0; i < data_count; i++) {
+    TestAnalysis.push(mode_data[i]);
+  }
+
+  TEST_ASSERT_EQUAL(4, TestAnalysis.partial_highest_mode(partial_id));
 }
 
 void test_partialVarianceAndStandardDeviation(void) {
@@ -145,11 +169,13 @@ void process() {
   RUN_TEST(test_minAndMax);
   RUN_TEST(test_median);
   RUN_TEST(test_lowestMode);
+  RUN_TEST(test_highestMode);
   RUN_TEST(test_getVarianceAndStandardDeviation);
-  
+
   RUN_TEST(test_partialMinAndMax);
   RUN_TEST(test_partialMedian);
   RUN_TEST(test_partialLowestMode);
+  RUN_TEST(test_partialHighestMode);
   RUN_TEST(test_partialVarianceAndStandardDeviation);
 
   UNITY_END();

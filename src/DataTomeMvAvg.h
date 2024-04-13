@@ -10,7 +10,7 @@
 
 template <typename TypeOfArray, typename TypeOfSum = TypeOfArray>
 class DataTomeMvAvg {
- private:
+ protected:
   size_t _array_size;
   size_t _current_index;
   size_t _average_counter;
@@ -217,7 +217,7 @@ class DataTomeMvAvg {
 
   size_t partials_memory() {
     return sizeof(_partial_sums_counter) + sizeof(_partial_sums) +
-          sizeof(_partial_sum_sizes);
+           sizeof(_partial_sum_sizes);
   }
 };
 
