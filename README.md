@@ -10,7 +10,7 @@
 [![Top Language](https://img.shields.io/github/languages/top/AlexandreHiroyuki/DataTome)](https://github.com/AlexandreHiroyuki/DataTome)
 
 <p align="center">
-<img src="./docs/icon.png" width="128" height="128" />
+<img src="https://raw.githubusercontent.com/AlexandreHiroyuki/DataTome/main/docs/icon.png" width="128" height="128" />
 </p>
 
 ## Description

@@ -18,13 +18,6 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
  public:
   DataTomeAnalysis(size_t size) : DataTomeMvAvg<TypeOfArray, TypeOfSum>(size) {}
 
-  /** Aliases **/
-
-  TypeOfArray mean() { return this->get(); }
-  size_t count() { return this->point_count(); }
-
-  /** Proper Methods **/
-
   TypeOfArray min() {
     TypeOfArray min = (*this)[0];
     for (size_t i = 1; i < this->point_count(); i++) {
@@ -149,17 +142,6 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
   TypeOfArray std() { return sqrt(var() / this->point_count()); }
 
   /** Partial Methods **/
-
-  /** Aliases **/
-
-  TypeOfArray partial_mean(size_t partial_id) {
-    return this->partial_get(partial_id);
-  }
-  size_t partial_count(size_t partial_id) {
-    return this->partial_size(partial_id);
-  }
-
-  /** Proper Methods **/
 
   TypeOfArray partial_min(size_t partial_id) {
     TypeOfArray min = (*this)[0];

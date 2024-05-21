@@ -43,7 +43,9 @@
     ],
     "export": {
         "exclude": [
-            ".github"
+            ".github",
+            ".gitignore",
+            ".vscode"
         ]
     },
     "srcDir": "src"

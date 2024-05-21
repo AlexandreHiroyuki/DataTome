@@ -17,6 +17,7 @@ DataTomeAnalysis	KEYWORD1
 push	KEYWORD2
 get	KEYWORD2
 get_by_brute	KEYWORD2
+mean	KEYWORD2
 
 front	KEYWORD2
 back	KEYWORD2
@@ -24,21 +25,35 @@ back	KEYWORD2
 atIndex	KEYWORD2
 size	KEYWORD2
 point_count	KEYWORD2
+count	KEYWORD2
 
+grow	KEYWORD2
 resize	KEYWORD2
 clear	KEYWORD2
 
 partial_create	KEYWORD2
 partial_get	KEYWORD2
+partial_mean	KEYWORD2
 partial_size	KEYWORD2
 partial_point_count	KEYWORD2
+partial_count	KEYWORD2
 
 #######################################
 # Methods and Functions (KEYWORD2)
 # DataTomeAnalysis
 #######################################
 
+min	KEYWORD2
+max	KEYWORD2
+median	KEYWORD2
+lowest_mode	KEYWORD2
+highest_mode	KEYWORD2
 std	KEYWORD2
 var	KEYWORD2
+partial_min	KEYWORD2
+partial_max	KEYWORD2
+partial_median	KEYWORD2
+partial_lowest_mode	KEYWORD2
+partial_highest_mode	KEYWORD2
 partial_var	KEYWORD2
 partial_std	KEYWORD2
