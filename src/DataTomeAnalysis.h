@@ -133,7 +133,8 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     TypeOfArray var = 0;
     for (size_t i = 0; i < this->point_count(); i++) {
-      var += ((*this)[i] - average) * ((*this)[i] - average);
+      TypeOfArray data_point = (*this)[i] - average;
+      var += (data_point - average) * (data_point - average);
     }
 
     return var;
@@ -264,7 +265,8 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     TypeOfArray var = 0;
     for (size_t i = 0; i < this->partial_point_count(partial_id); i++) {
-      var += ((*this)[i] - average) * ((*this)[i] - average);
+      TypeOfArray data_point = (*this)[i] - average;
+      var += (data_point - average) * (data_point - average);
     }
 
     return var;
