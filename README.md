@@ -15,7 +15,7 @@
 
 ## Description
 
-Data Tome is a C++ library for data analysis and data filtering on IoT devices. Focus on the developer's experience and performance.
+Data Tome is a C++ library for data analysis and data filtering on embedded devices (IoT). Focus on the developer's experience and performance.
 
 ## Getting Started
 
