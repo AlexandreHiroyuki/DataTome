@@ -28,9 +28,9 @@ Data Tome is a C++ library for data analysis and data filtering on embedded devi
 
 This library calculates statistical functions using a time-series sample implemented with a circular array that improves the performance.
 
-> Online Docs: _[Click here to see the full documentation](https://alexandrehiroyuki.github.io/DataTomeDocs/)_
->
-> Docs GitHub Repository: _[The documentation is coded with docusaurus, and you can visit the repository](https://github.com/AlexandreHiroyuki/DataTomeDocs)_
+- Online Docs: _[Click here to see the full documentation](https://alexandrehiroyuki.github.io/DataTomeDocs/)_
+
+- Docs GitHub Repository: _[The documentation is coded with docusaurus, and you can visit the repository](https://github.com/AlexandreHiroyuki/DataTomeDocs)_
 
 ## Contributing
 
