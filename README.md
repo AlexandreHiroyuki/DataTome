@@ -38,4 +38,4 @@ This library calculates statistical functions using a time-series sample impleme
 
 ## Developed by
 
-**Alexandre Hiroyuki** – [GitHub](https://github.com/AlexandreHiroyuki) – [LinkedIn](https://www.linkedin.com/in/alexandre-hiroyuki-yamauchi-7137241a6/)
+**Alexandre Hiroyuki** – [GitHub](https://github.com/AlexandreHiroyuki) – [LinkedIn](https://www.linkedin.com/in/alexandre-hiroyuki-yamauchi/)

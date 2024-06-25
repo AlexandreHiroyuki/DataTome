@@ -2,7 +2,7 @@
     "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
     "name": "DataTome",
     "version": "1.6.3",
-    "description": "Data Tome is a C++ library for data analysis and data filtering on embedded devices (IoT). Focus on the developer's experience and performance.",
+    "description": "Data analysis and filtering using time series for embedded devices (IoT). All in a single C++ library, Data Tome. Focus on the developer's experience and performance.",
     "keywords": "sensors, input, data, processing, analysis, arduino, library, filter, moving average, smooth, standard, deviation, mean, partial, tome, datatome",
     "repository": {
         "type": "git",

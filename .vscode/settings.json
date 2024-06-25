@@ -8,6 +8,8 @@
   "conventionalCommits.scopes": [
     "DataTomeAnalysis",
     "DataTomeMvAvg",
-    "test"
+    "test",
+    "readme",
+    "library_metadata"
   ]
 }
