@@ -9,5 +9,6 @@
 
 #include <DataTomeAnalysis.h>
 #include <DataTomeMvAvg.h>
+#include <DataTomeUtils.h>
 
 #endif  // DATA_TOME_H

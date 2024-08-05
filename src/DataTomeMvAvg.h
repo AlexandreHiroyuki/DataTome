@@ -5,8 +5,8 @@
 #ifndef DATA_TOME_MV_AVG_H
 #define DATA_TOME_MV_AVG_H
 
-#include <cstdlib>
-#include <cstring>  // memset
+#include <stdlib.h>
+#include <string.h>  // memset
 
 template <typename TypeOfArray, typename TypeOfSum = TypeOfArray>
 class DataTomeMvAvg {
@@ -75,6 +75,10 @@ class DataTomeMvAvg {
     // @alias get_by_brute
     return get_by_brute(n_points);
   }
+  TypeOfArray mean() {
+    // @alias get
+    return get();
+  }
 
   TypeOfArray get_by_brute(size_t n_points) {
     if (n_points > _average_counter) n_points = _average_counter;
@@ -127,6 +131,10 @@ class DataTomeMvAvg {
   size_t size_of_memory() { return _array_size * sizeof(TypeOfArray); }
 
   size_t point_count() { return _average_counter; }
+  size_t count() {
+    // @alias point_count
+    return point_count();
+  }
 
   /** Modify array **/
 
@@ -150,6 +158,8 @@ class DataTomeMvAvg {
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &clear() {
     memset(_array, 0, sizeof(TypeOfArray) * _array_size);
+
+    memset(_partial_sums, 0, sizeof(TypeOfArray) * _partial_sums_counter);
 
     _current_index = 0;
 
@@ -197,6 +207,10 @@ class DataTomeMvAvg {
       return _partial_sums[id] /
              ((_average_counter == 0) ? 1 : _average_counter);
   }
+  TypeOfArray partial_mean(size_t id) {
+    // @alias partial_get
+    return partial_get(id);
+  }
 
   size_t partial_size_of_array(size_t id) {
     if (id > _partial_sums_counter) return 0;
@@ -213,6 +227,10 @@ class DataTomeMvAvg {
       return _partial_sum_sizes[id];
     else
       return _average_counter;
+  }
+  size_t partial_count(size_t id) {
+    // @alias partial_point_count
+    return partial_point_count(id);
   }
 
   size_t partials_memory() {

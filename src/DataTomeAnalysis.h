@@ -8,39 +8,31 @@
 #define DATA_TOME_ANALYSIS_H
 
 #include <DataTomeMvAvg.h>
-
-#include <algorithm>
-#include <cmath>
-#include <cstdlib>
+#include <DataTomeUtils.h>
+#include <math.h>
+#include <stdlib.h>
 
 template <typename TypeOfArray, typename TypeOfSum = TypeOfArray>
 class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
  public:
   DataTomeAnalysis(size_t size) : DataTomeMvAvg<TypeOfArray, TypeOfSum>(size) {}
 
-  /** Aliases **/
-
-  TypeOfArray mean() { return this->get(); }
-  size_t count() { return this->point_count(); }
-
-  /** Proper Methods **/
-
-  TypeOfArray min() {
-    TypeOfArray min = (*this)[0];
+  TypeOfArray minimum() {
+    TypeOfArray result = (*this)[0];
     for (size_t i = 1; i < this->point_count(); i++) {
-      if ((*this)[i] < min) min = (*this)[i];
+      if ((*this)[i] < result) result = (*this)[i];
     }
 
-    return min;
+    return result;
   }
 
-  TypeOfArray max() {
-    TypeOfArray max = (*this)[0];
+  TypeOfArray maximum() {
+    TypeOfArray result = (*this)[0];
     for (size_t i = 1; i < this->point_count(); i++) {
-      if ((*this)[i] > max) max = (*this)[i];
+      if ((*this)[i] > result) result = (*this)[i];
     }
 
-    return max;
+    return result;
   }
 
   TypeOfArray median() {
@@ -52,7 +44,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
 
-    std::sort(temp, temp + current_size);
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     if (current_size % 2 == 0) {
       median = (temp[current_size / 2 - 1] + temp[current_size / 2]) / 2;
@@ -73,7 +65,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
 
-    std::sort(temp, temp + current_size);
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     size_t max_count = 0;
     TypeOfArray mode = temp[0];
@@ -108,7 +100,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
 
-    std::sort(temp, temp + current_size);
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     size_t max_count = 0;
     TypeOfArray mode = temp[0];
@@ -140,7 +132,8 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     TypeOfArray var = 0;
     for (size_t i = 0; i < this->point_count(); i++) {
-      var += ((*this)[i] - average) * ((*this)[i] - average);
+      TypeOfArray data_point = (*this)[i] - average;
+      var += (data_point) * (data_point);
     }
 
     return var;
@@ -150,33 +143,22 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
   /** Partial Methods **/
 
-  /** Aliases **/
-
-  TypeOfArray partial_mean(size_t partial_id) {
-    return this->partial_get(partial_id);
-  }
-  size_t partial_count(size_t partial_id) {
-    return this->partial_size(partial_id);
-  }
-
-  /** Proper Methods **/
-
-  TypeOfArray partial_min(size_t partial_id) {
-    TypeOfArray min = (*this)[0];
+  TypeOfArray partial_minimum(size_t partial_id) {
+    TypeOfArray result = (*this)[0];
     for (size_t i = 1; i < this->partial_point_count(partial_id); i++) {
-      if ((*this)[i] < min) min = (*this)[i];
+      if ((*this)[i] < result) result = (*this)[i];
     }
 
-    return min;
+    return result;
   }
 
-  TypeOfArray partial_max(size_t partial_id) {
-    TypeOfArray max = (*this)[0];
+  TypeOfArray partial_maximum(size_t partial_id) {
+    TypeOfArray result = (*this)[0];
     for (size_t i = 1; i < this->partial_point_count(partial_id); i++) {
-      if ((*this)[i] > max) max = (*this)[i];
+      if ((*this)[i] > result) result = (*this)[i];
     }
 
-    return max;
+    return result;
   }
 
   TypeOfArray partial_median(size_t partial_id) {
@@ -190,7 +172,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
       temp[i] = (*this)[i];
     }
 
-    std::sort(temp, temp + current_size);
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     if (current_size % 2 == 0) {
       median = (temp[current_size / 2 - 1] + temp[current_size / 2]) / 2;
@@ -213,7 +195,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
       temp[i] = (*this)[i];
     }
 
-    std::sort(temp, temp + current_size);
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     size_t max_count = 0;
     TypeOfArray mode = temp[0];
@@ -250,7 +232,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
       temp[i] = (*this)[i];
     }
 
-    std::sort(temp, temp + current_size);
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     size_t max_count = 0;
     TypeOfArray mode = temp[0];
@@ -282,7 +264,8 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     TypeOfArray var = 0;
     for (size_t i = 0; i < this->partial_point_count(partial_id); i++) {
-      var += ((*this)[i] - average) * ((*this)[i] - average);
+      TypeOfArray data_point = (*this)[i] - average;
+      var += (data_point) * (data_point);
     }
 
     return var;
