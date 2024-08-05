@@ -8,6 +8,7 @@
 #define DATA_TOME_ANALYSIS_H
 
 #include <DataTomeMvAvg.h>
+#include <DataTomeUtils.h>
 #include <math.h>
 #include <stdlib.h>
 
@@ -43,10 +44,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
 
-    qsort(temp, current_size, sizeof(TypeOfArray),
-          [](const void *a, const void *b) -> int {
-            return (*(TypeOfArray *)a - *(TypeOfArray *)b);
-          });
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     if (current_size % 2 == 0) {
       median = (temp[current_size / 2 - 1] + temp[current_size / 2]) / 2;
@@ -67,10 +65,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
 
-    qsort(temp, current_size, sizeof(TypeOfArray),
-          [](const void *a, const void *b) -> int {
-            return (*(TypeOfArray *)a - *(TypeOfArray *)b);
-          });
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     size_t max_count = 0;
     TypeOfArray mode = temp[0];
@@ -105,10 +100,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
 
     memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
 
-    qsort(temp, current_size, sizeof(TypeOfArray),
-          [](const void *a, const void *b) -> int {
-            return (*(TypeOfArray *)a - *(TypeOfArray *)b);
-          });
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     size_t max_count = 0;
     TypeOfArray mode = temp[0];
@@ -180,10 +172,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
       temp[i] = (*this)[i];
     }
 
-    qsort(temp, current_size, sizeof(TypeOfArray),
-          [](const void *a, const void *b) -> int {
-            return (*(TypeOfArray *)a - *(TypeOfArray *)b);
-          });
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     if (current_size % 2 == 0) {
       median = (temp[current_size / 2 - 1] + temp[current_size / 2]) / 2;
@@ -206,10 +195,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
       temp[i] = (*this)[i];
     }
 
-    qsort(temp, current_size, sizeof(TypeOfArray),
-          [](const void *a, const void *b) -> int {
-            return (*(TypeOfArray *)a - *(TypeOfArray *)b);
-          });
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     size_t max_count = 0;
     TypeOfArray mode = temp[0];
@@ -246,10 +232,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
       temp[i] = (*this)[i];
     }
 
-    qsort(temp, current_size, sizeof(TypeOfArray),
-          [](const void *a, const void *b) -> int {
-            return (*(TypeOfArray *)a - *(TypeOfArray *)b);
-          });
+    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
 
     size_t max_count = 0;
     TypeOfArray mode = temp[0];
