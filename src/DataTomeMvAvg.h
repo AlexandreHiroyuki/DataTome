@@ -5,8 +5,8 @@
 #ifndef DATA_TOME_MV_AVG_H
 #define DATA_TOME_MV_AVG_H
 
-#include <cstdlib>
-#include <cstring>  // memset
+#include <stdlib.h>
+#include <string.h>  // memset
 
 template <typename TypeOfArray, typename TypeOfSum = TypeOfArray>
 class DataTomeMvAvg {
@@ -158,6 +158,8 @@ class DataTomeMvAvg {
 
   DataTomeMvAvg<TypeOfArray, TypeOfSum> &clear() {
     memset(_array, 0, sizeof(TypeOfArray) * _array_size);
+
+    memset(_partial_sums, 0, sizeof(TypeOfArray) * _partial_sums_counter);
 
     _current_index = 0;
 

@@ -10,6 +10,10 @@ Open an issue on the repository and provide the following information:
 2. What board and/or framework are you using?
 3. How can the issue be reproduced? Provide a minimal code snippet that reproduces the issue if possible.
 
+## Code Convention
+
+- Don't include C++ standard library functions, because it does not compile for AVR boards (C std libs still works). 
+
 ## Testing
 
 The library comes with a set of automated tests. Contributions should include tests to cover the new functionality and ensure that no regressions are introduced.

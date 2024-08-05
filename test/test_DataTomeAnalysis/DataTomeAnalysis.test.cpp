@@ -16,8 +16,8 @@ void test_minAndMax(void) {
     testAnalysis.push(data[i]);
   }
 
-  TEST_ASSERT_EQUAL(data[0], testAnalysis.min());
-  TEST_ASSERT_EQUAL(data[9], testAnalysis.max());
+  TEST_ASSERT_EQUAL(data[0], testAnalysis.minimum());
+  TEST_ASSERT_EQUAL(data[9], testAnalysis.maximum());
 }
 
 void test_median(void) {
@@ -87,8 +87,8 @@ void test_partialMinAndMax(void) {
     testAnalysis.push(data[i]);
   }
 
-  TEST_ASSERT_EQUAL(data[2], testAnalysis.partial_min(partial_id));
-  TEST_ASSERT_EQUAL(data[4], testAnalysis.partial_max(partial_id));
+  TEST_ASSERT_EQUAL(data[2], testAnalysis.partial_minimum(partial_id));
+  TEST_ASSERT_EQUAL(data[4], testAnalysis.partial_maximum(partial_id));
 }
 
 void test_partialMedian(void) {

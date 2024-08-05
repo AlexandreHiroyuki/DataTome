@@ -14,4 +14,7 @@ build/
 .idea/
 CMakeSettings.json
 
+# Local Build Test
+main.cpp
+
 .pio/
