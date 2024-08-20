@@ -31,4 +31,3 @@ jobs:
       - name: Run Build Test for ESP32 Dev Module
         run: platformio run -e esp32dev -t build_test.cpp
 
-
