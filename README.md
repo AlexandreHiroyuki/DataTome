@@ -17,6 +17,11 @@
 
 Data Tome is a C++ library for data analysis and data filtering on embedded devices (IoT). Focus on the developer's experience and performance.
 
+- Simple Moving Average (SMA). 
+- Exponential Moving Average (EMA).
+- Simple Moving Median (implemented on DataTomeAnalysis).
+- Variance, Standard Deviation, and more.
+
 ## Getting Started
 
 - This library is listed in the official [Arduino Library Manager](https://www.arduino.cc/reference/en/libraries/datatome/).
@@ -35,6 +40,8 @@ This library calculates statistical functions using a time-series sample impleme
 ## Contributing
 
 [Read here how to contribute](https://github.com/AlexandreHiroyuki/DataTome/blob/master/CONTRIBUTING.md).
+
+It describes how to report issues, code conventions, testing, and how to publish a package on the PlatformIO Registry.
 
 ## Developed by
 

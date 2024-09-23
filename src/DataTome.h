@@ -8,6 +8,7 @@
 #define DATA_TOME_H
 
 #include <DataTomeAnalysis.h>
+#include <DataTomeCumulative.h>
 #include <DataTomeMvAvg.h>
 #include <DataTomeUtils.h>
 

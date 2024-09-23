@@ -4,7 +4,7 @@
 
 // Create an Arithmetic Moving Average object of unsigned int type,
 // 10 in size
-DataTomeMvAvg<unsigned, unsigned long> test(10);
+DataTomeMvAvg<int, long int> test(10);
 
 // This variable just generates input for average test
 unsigned delta_x = 0;
