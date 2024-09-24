@@ -58,6 +58,8 @@
     "test",
     "readme",
     "library_metadata",
-    "DataTome"
+    "DataTome",
+    "DataTomeCumulative",
+    "DataTomeExpAvg"
   ]
 }
