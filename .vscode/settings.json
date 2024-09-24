@@ -53,13 +53,13 @@
     "typeinfo": "cpp"
   },
   "conventionalCommits.scopes": [
+    "DataTome",
     "DataTomeAnalysis",
+    "DataTomeCumulative",
+    "DataTomeExpAvg",
     "DataTomeMvAvg",
     "test",
     "readme",
-    "library_metadata",
-    "DataTome",
-    "DataTomeCumulative",
-    "DataTomeExpAvg"
+    "library_metadata"
   ]
 }

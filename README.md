@@ -19,6 +19,7 @@ Data Tome is a C++ library for data analysis and data filtering on embedded devi
 
 - Simple Moving Average (SMA). 
 - Exponential Moving Average (EMA).
+- Cumulative Average (CA).
 - Simple Moving Median (implemented on DataTomeAnalysis).
 - Variance, Standard Deviation, and more.
 

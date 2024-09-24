@@ -19,6 +19,10 @@ class DataTomeExpAvg {
 
  public:
   DataTomeExpAvg() : _exp_avg(0), _count(0) {}
+  // RECOMMENDED: use a simple average of the first elements of your data set as
+  // initial_value
+  DataTomeExpAvg(TypeOfSum initial_value)
+      : _exp_avg(initial_value), _count(0) {}
 
   DataTomeExpAvg<TypeOfSum> &push(TypeOfSum input) {
     if (_count >= ULONG_MAX) {
