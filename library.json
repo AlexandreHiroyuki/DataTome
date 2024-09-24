@@ -22,8 +22,11 @@
     "platforms": "*",
     "headers": [
         "DataTome.h",
+        "DataTomeAnalysis.h",
+        "DataTomeCumulative.h",
+        "DataTomeExpAvg",
         "DataTomeMvAvg.h",
-        "DataTomeAnalysis.h"
+        "DataTomeUtils.h"
     ],
     "examples": [
         {
@@ -43,9 +46,12 @@
     ],
     "export": {
         "exclude": [
+            "test/",
             ".github",
             ".gitignore",
-            ".vscode"
+            ".vscode",
+            "build_test.cpp",
+            "docs/icon.png"
         ]
     },
     "srcDir": "src"

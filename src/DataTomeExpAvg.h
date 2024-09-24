@@ -1,10 +1,10 @@
 /***************************************************************
-  DataTomeCumulative.h
-  Created by Alexandre Hiroyuki Yamauchi, September 23, 2024.
+  DataTomeExpAvg.h
+  Created by Alexandre Hiroyuki Yamauchi, August 19, 2024.
 ***************************************************************/
 
-#ifndef DATA_TOME_CUMULATIVE_H
-#define DATA_TOME_CUMULATIVE_H
+#ifndef DATA_TOME_EXP_AVG_H
+#define DATA_TOME_EXP_AVG_H
 
 #include <limits.h>
 
@@ -12,27 +12,28 @@
 // WARNING: using this class with integer types may result in a loss of
 // precision due to cumulative rounding of integer divisions.
 template <typename TypeOfSum>
-class DataTomeCumulative {
+class DataTomeExpAvg {
  protected:
-  TypeOfSum _cumulative_average;
+  TypeOfSum _exp_avg;
   unsigned long int _count;
 
  public:
-  DataTomeCumulative() : _cumulative_average(0), _count(0) {}
+  DataTomeExpAvg() : _exp_avg(0), _count(0) {}
 
-  DataTomeCumulative<TypeOfSum> &push(TypeOfSum input) {
+  DataTomeExpAvg<TypeOfSum> &push(TypeOfSum input) {
     if (_count >= ULONG_MAX) {
-      _cumulative_average = 0;
+      _exp_avg = 0;
       _count = 0;
     }
     _count++;
 
-    _cumulative_average += (input - _cumulative_average) / (_count);
+    TypeOfSum multiplier = 2 / (_count);
+    _exp_avg = (input * multiplier) + (_exp_avg * (1 - multiplier));
 
     return *this;
   }
 
-  TypeOfSum get() { return _cumulative_average; }
+  TypeOfSum get() { return _exp_avg; }
 };
 
-#endif  // DATA_TOME_CUMULATIVE_H
+#endif  // DATA_TOME_EXP_AVG_H

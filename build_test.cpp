@@ -4,12 +4,13 @@
 
 // Create an Arithmetic Moving Average object of unsigned int type,
 // 10 in size
-DataTomeMvAvg<unsigned, unsigned long> test(10);
-DataTomeAnalysis<unsigned, unsigned long> test2(10);
-// DataTomeExpAvg<unsigned, unsigned long> test3(10);
+DataTomeMvAvg<int, long int> test(10);
+DataTomeAnalysis<int, long int> test2(10);
+DataTomeCumulative<double> test3;
+DataTomeExpAvg<double> test4;
 
 // This variable just generates input for average test
-unsigned delta_x = 0;
+int delta_x = 0;
 
 void setup() {
   // Initialize serial interface
@@ -19,9 +20,12 @@ void setup() {
 void loop() {
   // Pushes the input in the moving average object
   test.push(delta_x);
+  test2.push(delta_x);
+  test3.push(delta_x);
+  test4.push(delta_x);
 
   // Generates the next input
-  delta_x += 5;
+  delta_x += 3;
   if (delta_x > 1000) delta_x = 0;
 
   // Prints each value stored in the moving average
@@ -37,6 +41,19 @@ void loop() {
   Serial.print(test.front());
   Serial.print(" b: ");
   Serial.println(test.back());
+
+  Serial.print("Analysis: ");
+  Serial.print(test2.mean());
+  Serial.print(" | Std: ");
+  Serial.print(test2.std());
+  Serial.print(" | Median: ");
+  Serial.println(test2.median());
+
+  Serial.print("Cumulative: ");
+  Serial.println(test3.get());
+
+  Serial.print(" | ExpAvg: ");
+  Serial.println(test4.get());
 
   delay(1000);
 }
