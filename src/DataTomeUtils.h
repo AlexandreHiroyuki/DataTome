@@ -14,4 +14,16 @@ int sort_ascend(const void *cmp1, const void *cmp2) {
   return (int)a - b;
 }
 
-#endif  // DATA_TOME_UTILS_H
+template <typename TypeOfArray>
+void swap(TypeOfArray &a, TypeOfArray &b) {
+  TypeOfArray temp = a;
+  a = b;
+  b = temp;
+}
+
+template <typename T1, typename T2>
+auto dt_min(const T1 &a, const T2 &b) -> decltype(a < b ? a : b) {
+  return (a < b) ? a : b;
+}
+
+#endif // DATA_TOME_UTILS_H
