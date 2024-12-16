@@ -35,26 +35,26 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     return result;
   }
 
-  TypeOfArray median() {
-    TypeOfArray median = 0;
-    size_t current_size = this->point_count();
+  double median() {
+    double calculated_median;
+    size_t current_size = this->point_count(),
+           m = current_size / 2;
+    TypeOfArray *temp_array = (TypeOfArray *)malloc(sizeof(TypeOfArray) * current_size);
 
-    TypeOfArray *temp =
-        (typeof(temp))malloc(current_size * sizeof(typeof(temp)));
+    memcpy(temp_array, this->_array, sizeof(TypeOfArray) * current_size);
 
-    memcpy(temp, this->_array, current_size * sizeof(TypeOfArray));
-
-    qsort(temp, current_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
-
-    if (current_size % 2 == 0) {
-      median = (temp[current_size / 2 - 1] + temp[current_size / 2]) / 2;
-    } else {
-      median = temp[current_size / 2];
+    if (current_size % 2 == 0)
+    {
+      size_t m1 = quickSelect(0, current_size - 1, m - 1, temp_array),
+             m2 = quickSelect(0, current_size - 1, m, temp_array);
+      calculated_median = (m1 + m2) / 2.0;
     }
-
-    free(temp);
-
-    return median;
+    else
+    {
+      calculated_median = quickSelect(0, current_size - 1, m, temp_array);
+    }
+    free(temp_array);
+    return calculated_median;
   }
 
   TypeOfArray lowest_mode() {
@@ -275,6 +275,56 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
     return sqrt(partial_var(partial_id) /
                 this->partial_point_count(partial_id));
   }
+
+  private:
+    TypeOfArray medianOfMedians(int l, int r, TypeOfArray nums[]) {
+      int k = 5;
+      size_t size = r - l + 1,
+             medians_size = (size + k - 1) / k;
+      TypeOfArray medians[medians_size];
+      for (int i = l, m_count = 0; i <= r; i += k, m_count++)
+      {
+        int left = i, right = dt_min(i + k, r + 1),
+            mid = left + (right - left) / 2;
+        qsort(nums + left, right - left, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
+        medians[m_count] = (nums[mid]);
+      }
+      qsort(medians, medians_size, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
+      return medians[medians_size / 2];
+    };
+
+    TypeOfArray quickSelect(int l, int r, int m, TypeOfArray nums[]) {
+      int pivot = medianOfMedians(l, r, nums),
+          index = r,
+          p = l;
+      for (int i = l; i <= r; i++)
+      {
+        if (nums[i] == pivot)
+        {
+          index = i;
+          swap(nums[index], nums[r]);
+          break;
+        }
+      }
+      for (int i = l; i < r; i++)
+      {
+        if (nums[i] < nums[r])
+        {
+          swap(nums[i], nums[p]);
+          p += 1;
+        }
+      }
+      swap(nums[p], nums[r]);
+      if (p > m)
+      {
+        return quickSelect(l, p - 1, m, nums);
+      }
+      else if (p < m)
+      {
+        return quickSelect(p + 1, r, m, nums);
+      }
+      return nums[p];
+    };
 };
 
 #endif  // DATA_TOME_ANALYSIS_H
