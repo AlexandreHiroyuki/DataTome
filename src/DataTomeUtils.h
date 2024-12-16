@@ -21,8 +21,8 @@ void swap(TypeOfArray &a, TypeOfArray &b) {
   b = temp;
 }
 
-template <typename T1, typename T2>
-auto dt_min(const T1 &a, const T2 &b) -> decltype(a < b ? a : b) {
+template <typename T>
+const T &dt_min(const T &a, const T &b) {
   return (a < b) ? a : b;
 }
 
