@@ -284,7 +284,7 @@ class DataTomeAnalysis : public DataTomeMvAvg<TypeOfArray, TypeOfSum> {
       TypeOfArray medians[medians_size];
       for (int i = l, m_count = 0; i <= r; i += k, m_count++)
       {
-        int left = i, right = min(i + k, r + 1),
+        int left = i, right = dt_min(i + k, r + 1),
             mid = left + (right - left) / 2;
         qsort(nums + left, right - left, sizeof(TypeOfArray), sort_ascend<TypeOfArray>);
         medians[m_count] = (nums[mid]);
