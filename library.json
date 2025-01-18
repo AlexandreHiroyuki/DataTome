@@ -1,7 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
     "name": "DataTome",
-    "version": "1.8.1",
+    "version": "1.9.0",
     "description": "Data analysis and filtering using time series for embedded devices (IoT). All in a single C++ library, Data Tome. Includes Simple Moving Average, Exponential Moving Average, Simple Moving Median, Cumulative Moving Average, Standard Deviation, and more.",
     "keywords": "filter, moving average, exponential moving average, median, mean, standard, deviation, arduino, library, smooth, signal, sensors, input, data, processing, analysis, partial, tome, moving-average, moving, average, exponential, cumulative",
     "repository": {
