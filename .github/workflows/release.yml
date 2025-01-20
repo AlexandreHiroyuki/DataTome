@@ -1,0 +1,35 @@
+name: Version Release
+
+on:
+  workflow_run:
+    workflows: ["PlatformIO Unit Tests"]
+    types:
+      - completed
+
+jobs:
+  gh-release:
+    name: Release a new Version 
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - name: GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm init -y
+          npm install --save-dev \
+            semantic-release \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator \
+            @semantic-release/git \
+            @semantic-release/changelog \
+            @semantic-release/github
+          npx semantic-release@24.2.1
+          echo 👍 Successfully released a new version

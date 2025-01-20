@@ -12,7 +12,9 @@ Open an issue on the repository and provide the following information:
 
 ## Code Convention
 
-- Don't include C++ standard library functions, because it does not compile for AVR boards (C std libs still works). 
+- Don't include C++ standard library functions, because it does not compile for AVR boards (C std libs still works).
+
+- **Note:** All commits and pull requests must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Please ensure your messages are properly formatted.
 
 ## Testing
 
