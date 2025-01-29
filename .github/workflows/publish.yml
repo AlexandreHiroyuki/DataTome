@@ -3,6 +3,7 @@ name: Publish to PlatformIO
 on:
   release:
     types: [released]
+  workflow_call:
 
 jobs:
   pio-publish:
@@ -10,6 +11,8 @@ jobs:
     name: Publish a new Release to PlatformIO
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.9"
@@ -26,13 +29,14 @@ jobs:
           LATEST_TAG=$(git describe --tags --abbrev=0)
           LIB_V=$(jq -r .version library.json)
           PROPS_V=$(cat library.properties | grep -oP version=\K.*)
-          if [ $LIB_V == $LATEST_TAG ]; then
-            sed -i -E "s/(version=).*/\1${LATEST_TAG}/" library.properties 
-            echo ✅ Successfully Modified release tag in library.json file...
-          elif [ $PROPS_V == $LATEST_TAG ]; then
-            jq ".version = \"${LATEST_TAG}\"" library.json > temp.json && mv temp.json library.json            
-            echo ✅ Successfully Modified release tag in library.properties file...
+          if [ $LIB_V = $LATEST_TAG ] || [ $PROPS_V = $LATEST_TAG ]; then
+            exit 1
           fi
+          set -e
+          sed -i -E "s/(version=).*/\1${LATEST_TAG}/" library.properties 
+          echo ✅ Successfully Modified release tag in library.json file...
+          jq ".version = \"${LATEST_TAG}\"" library.json > temp.json && mv temp.json library.json            
+          echo ✅ Successfully Modified release tag in library.properties file...
       - name: Publish to PlatformIO
         env:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
@@ -51,16 +55,19 @@ jobs:
       - name: Update library versions
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0)
+          set -e
           sed -i -E "s/(version=).*/\1${LATEST_TAG}/" library.properties
           jq ".version = \"${LATEST_TAG}\"" library.json > temp.json && mv temp.json library.json
       - name: Push to main branch using PAT
         env:
-          # new fine-grained PAT with contents = rw 
-          PAT: ${{ secrets.CI_PAT }} 
+          PAT: ${{ secrets.CI_PAT }} # new fine-grained PAT with contents = rw
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git remote set-url origin https://x-access-token:${{ env.PAT }}@github.com/${{ github.repository }}
+          git stash
+          git pull origin main
+          git stash pop
           git add library.json library.properties
           git commit -m "Automated update: Update library.json library.properties"
           git push
