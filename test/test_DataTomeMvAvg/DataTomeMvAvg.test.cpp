@@ -16,7 +16,7 @@ void test_getAverage(void) {
 
   testMV.push(data[0]).push(data[1]).push(data[2]);
 
-  long int mock_average = (data[0] + data[1] + data[2]) / 3;
+  long int mock_average       = (data[0] + data[1] + data[2]) / 3;
   long int mock_brute_average = (data[1] + data[2]) / 2;
   TEST_ASSERT_EQUAL(mock_average, testMV.get());
   TEST_ASSERT_EQUAL(mock_brute_average, testMV.get_by_brute(2));
@@ -46,13 +46,13 @@ void test_getElementsByIndex(void) {
 
 void test_sizeGrowAndPointCount(void) {
   DataTomeMvAvg<int, long int> testMV(5);
-  size_t expected_size = 5;
-  size_t expected_memory_size = expected_size * sizeof(int);
-  size_t new_expected_size = 10;
+  size_t expected_size            = 5;
+  size_t expected_memory_size     = expected_size * sizeof(int);
+  size_t new_expected_size        = 10;
   size_t new_expected_memory_size = new_expected_size * sizeof(int);
 
   long int expected_sum = 0;
-  for (size_t i = 0; i < expected_size + 1; i++) {
+  for(size_t i = 0; i < expected_size + 1; i++) {
     testMV.push(data[i]);
     expected_sum += data[i];
 
@@ -79,11 +79,11 @@ void test_sizeGrowAndPointCount(void) {
 
 void test_smallerGrow(void) {
   DataTomeMvAvg<int, long int> testMV(5);
-  size_t expected_size = 5;
+  size_t expected_size        = 5;
   size_t expected_memory_size = expected_size * sizeof(int);
-  size_t new_unexpected_size = 3;
+  size_t new_unexpected_size  = 3;
 
-  for (size_t i = 0; i < expected_size + 1; i++) {
+  for(size_t i = 0; i < expected_size + 1; i++) {
     testMV.push(data[i]);
 
     TEST_ASSERT_EQUAL((i < expected_size) ? i + 1 : expected_size,
@@ -114,16 +114,16 @@ void test_clear(void) {
 void test_partialAverage(void) {
   DataTomeMvAvg<int, long int> testMV(10);
   size_t partial_size = 3;
-  size_t data_count = 5;
+  size_t data_count   = 5;
 
   size_t partial_id = testMV.partial_create(partial_size);
 
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     testMV.push(data[i]);
   }
 
   long int mock_sum = 0;
-  for (size_t i = data_count - 1; i > data_count - partial_size - 1; i--) {
+  for(size_t i = data_count - 1; i > data_count - partial_size - 1; i--) {
     mock_sum += data[i];
   }
 
@@ -133,11 +133,11 @@ void test_partialAverage(void) {
 void test_partialSizeAndPointCount(void) {
   DataTomeMvAvg<int, long int> testMV(10);
   size_t partial_size = 3;
-  size_t data_count = 5;
+  size_t data_count   = 5;
 
   size_t partial_id = testMV.partial_create(partial_size);
 
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     testMV.push(data[i]);
     TEST_ASSERT_EQUAL((i < partial_size) ? i + 1 : partial_size,
                       testMV.partial_point_count(partial_id));

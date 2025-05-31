@@ -13,4 +13,4 @@
 #include <DataTomeMvAvg.h>
 #include <DataTomeUtils.h>
 
-#endif  // DATA_TOME_H
+#endif // DATA_TOME_H

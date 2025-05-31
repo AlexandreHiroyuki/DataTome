@@ -1,9 +1,9 @@
 #include <DataTomeExpAvg.h>
 #include <unity.h>
 
-void setUp(void) {}  // before test
+void setUp(void) {}    // before test
 
-void tearDown(void) {}  // after test
+void tearDown(void) {} // after test
 
 void test_getExpAverage(void) {
   DataTomeExpAvg<double> testMV;

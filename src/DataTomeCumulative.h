@@ -11,19 +11,18 @@
 // RECOMMENDED: use double type for TypeOfSum
 // WARNING: using this class with integer types may result in a loss of
 // precision due to cumulative rounding of integer divisions.
-template <typename TypeOfSum>
-class DataTomeCumulative {
- protected:
+template <typename TypeOfSum> class DataTomeCumulative {
+protected:
   TypeOfSum _cumulative_average;
   unsigned long int _count;
 
- public:
+public:
   DataTomeCumulative() : _cumulative_average(0), _count(0) {}
 
   DataTomeCumulative<TypeOfSum> &push(TypeOfSum input) {
-    if (_count >= ULONG_MAX) {
+    if(_count >= ULONG_MAX) {
       _cumulative_average = 0;
-      _count = 0;
+      _count              = 0;
     }
     _count++;
 
@@ -35,4 +34,4 @@ class DataTomeCumulative {
   TypeOfSum get() { return _cumulative_average; }
 };
 
-#endif  // DATA_TOME_CUMULATIVE_H
+#endif // DATA_TOME_CUMULATIVE_H

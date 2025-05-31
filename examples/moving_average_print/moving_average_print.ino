@@ -20,10 +20,10 @@ void loop() {
 
   // Generates the next input
   delta_x += 5;
-  if (delta_x > 1000) delta_x = 0;
+  if(delta_x > 1000) delta_x = 0;
 
   // Prints each value stored in the moving average
-  for (uint8_t i = 0; i < test.size(); i++) {
+  for(uint8_t i = 0; i < test.size(); i++) {
     Serial.print(test[i]);
     Serial.print(" ");
   }
