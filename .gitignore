@@ -14,7 +14,6 @@ build/
 .idea/
 CMakeSettings.json
 
-# Local Build Test
-main.cpp
-
+# PlatformIO
 .pio/
+compile_commands.json

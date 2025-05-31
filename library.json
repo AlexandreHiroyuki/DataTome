@@ -50,8 +50,8 @@
             ".github",
             ".gitignore",
             ".vscode",
-            "build_test.cpp",
-            "docs/icon.png"
+            "docs/icon.png",
+            "src/main.cpp"
         ]
     },
     "srcDir": "src"

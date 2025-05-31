@@ -1,0 +1,3 @@
+---
+Checks: '-*,cppcoreguidelines-*,cert-*,clang-analyzer-*,performance-*,readability-*'
+FormatStyle: file

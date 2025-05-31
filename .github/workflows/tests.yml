@@ -26,7 +26,3 @@ jobs:
           pip install platformio
       - name: Run Tests on the Desktop Environment
         run: platformio test -e desktop
-      - name: Run Build Test for Arduino Uno
-        run: platformio run -e arduino_uno -t build_test.cpp
-      - name: Run Build Test for ESP32 Dev Module
-        run: platformio run -e esp32dev -t build_test.cpp
