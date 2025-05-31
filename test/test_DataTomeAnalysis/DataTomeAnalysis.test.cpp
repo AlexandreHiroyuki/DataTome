@@ -1,9 +1,9 @@
 #include <DataTomeAnalysis.h>
 #include <unity.h>
 
-void setUp(void) {}  // before test
+void setUp(void) {}    // before test
 
-void tearDown(void) {}  // after test
+void tearDown(void) {} // after test
 
 long int data[10] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 
@@ -12,7 +12,7 @@ long int mode_data[10] = {1, 2, 3, 3, 3, 3, 4, 4, 4, 4};
 void test_minAndMax(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
 
-  for (size_t i = 0; i < 10; i++) {
+  for(size_t i = 0; i < 10; i++) {
     testAnalysis.push(data[i]);
   }
 
@@ -23,7 +23,7 @@ void test_minAndMax(void) {
 void test_median(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
 
-  for (size_t i = 0; i < 10; i++) {
+  for(size_t i = 0; i < 10; i++) {
     testAnalysis.push(data[i]);
   }
 
@@ -33,7 +33,7 @@ void test_median(void) {
 void test_lowestMode(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
 
-  for (size_t i = 0; i < 10; i++) {
+  for(size_t i = 0; i < 10; i++) {
     testAnalysis.push(mode_data[i]);
   }
 
@@ -43,7 +43,7 @@ void test_lowestMode(void) {
 void test_highestMode(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
 
-  for (size_t i = 0; i < 10; i++) {
+  for(size_t i = 0; i < 10; i++) {
     testAnalysis.push(mode_data[i]);
   }
 
@@ -54,12 +54,12 @@ void test_getVarianceAndStandardDeviation(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
   size_t data_count = 5;
 
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     testAnalysis.push(data[i]);
   }
 
   long int mock_sum = 0;
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     mock_sum += data[i];
   }
 
@@ -67,7 +67,7 @@ void test_getVarianceAndStandardDeviation(void) {
   TEST_ASSERT_EQUAL(mock_average, testAnalysis.get());
 
   long int mock_var = 0;
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     mock_var += (data[i] - mock_average) * (data[i] - mock_average);
   }
 
@@ -79,11 +79,11 @@ void test_getVarianceAndStandardDeviation(void) {
 void test_partialMinAndMax(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
   size_t partial_size = 3;
-  size_t data_count = 5;
+  size_t data_count   = 5;
 
   size_t partial_id = testAnalysis.partial_create(partial_size);
 
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     testAnalysis.push(data[i]);
   }
 
@@ -94,11 +94,11 @@ void test_partialMinAndMax(void) {
 void test_partialMedian(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
   size_t partial_size = 3;
-  size_t data_count = 5;
+  size_t data_count   = 5;
 
   size_t partial_id = testAnalysis.partial_create(partial_size);
 
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     testAnalysis.push(data[i]);
   }
 
@@ -108,11 +108,11 @@ void test_partialMedian(void) {
 void test_partialLowestMode(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
   size_t partial_size = 5;
-  size_t data_count = 5;
+  size_t data_count   = 5;
 
   size_t partial_id = testAnalysis.partial_create(partial_size);
 
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     testAnalysis.push(mode_data[i]);
   }
 
@@ -122,11 +122,11 @@ void test_partialLowestMode(void) {
 void test_partialHighestMode(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
   size_t partial_size = 5;
-  size_t data_count = 10;
+  size_t data_count   = 10;
 
   size_t partial_id = testAnalysis.partial_create(partial_size);
 
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     testAnalysis.push(mode_data[i]);
   }
 
@@ -136,16 +136,16 @@ void test_partialHighestMode(void) {
 void test_partialVarianceAndStandardDeviation(void) {
   DataTomeAnalysis<int, long int> testAnalysis(10);
   size_t partial_size = 3;
-  size_t data_count = 5;
+  size_t data_count   = 5;
 
   size_t partial_id = testAnalysis.partial_create(partial_size);
 
-  for (size_t i = 0; i < data_count; i++) {
+  for(size_t i = 0; i < data_count; i++) {
     testAnalysis.push(data[i]);
   }
 
   long int mock_sum = 0;
-  for (size_t i = data_count - 1; i > data_count - partial_size - 1; i--) {
+  for(size_t i = data_count - 1; i > data_count - partial_size - 1; i--) {
     mock_sum += data[i];
   }
 
@@ -153,7 +153,7 @@ void test_partialVarianceAndStandardDeviation(void) {
   TEST_ASSERT_EQUAL(mock_average, testAnalysis.partial_get(partial_id));
 
   long int mock_var = 0;
-  for (size_t i = data_count - 1; i > data_count - partial_size - 1; i--) {
+  for(size_t i = data_count - 1; i > data_count - partial_size - 1; i--) {
     mock_var += (data[i] - mock_average) * (data[i] - mock_average);
   }
 

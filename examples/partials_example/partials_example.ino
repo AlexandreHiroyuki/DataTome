@@ -10,14 +10,14 @@ DataTomeMvAvg<int, long int> integer_mv(10);
 unsigned delta_x = 0;
 
 // These variables are the identification of the integer_mv partials
-size_t integer_mv_partial_id = 0;
+size_t integer_mv_partial_id   = 0;
 size_t integer_mv_partial_id_2 = 0;
 
 void setup() {
   // Initialize serial interface
   Serial.begin(9600);
 
-  integer_mv_partial_id = integer_mv.partial_create(3);
+  integer_mv_partial_id   = integer_mv.partial_create(3);
   integer_mv_partial_id_2 = integer_mv.partial_create(5);
 }
 
@@ -27,10 +27,10 @@ void loop() {
 
   // Generates the next input
   delta_x += 5;
-  if (delta_x > 1000) delta_x = 0;
+  if(delta_x > 1000) delta_x = 0;
 
   // Prints each value stored in the moving average
-  for (uint8_t i = 0; i < integer_mv.size(); i++) {
+  for(uint8_t i = 0; i < integer_mv.size(); i++) {
     Serial.print(integer_mv[i]);
     Serial.print(" ");
   }
