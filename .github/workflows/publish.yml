@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-tags: true
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.9"
@@ -24,19 +25,13 @@ jobs:
         run: |
           sudo apt update 
           sudo apt install -y jq
-      - name: Update Library Metadata and Configurations
+      - name: Update library versions
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0)
-          LIB_V=$(jq -r .version library.json)
-          PROPS_V=$(cat library.properties | grep -oP version=\K.*)
-          if [ $LIB_V = $LATEST_TAG ] || [ $PROPS_V = $LATEST_TAG ]; then
-            exit 1
-          fi
+          echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_OUTPUT
           set -e
-          sed -i -E "s/(version=).*/\1${LATEST_TAG}/" library.properties 
-          echo ✅ Successfully Modified release tag in library.json file...
-          jq ".version = \"${LATEST_TAG}\"" library.json > temp.json && mv temp.json library.json            
-          echo ✅ Successfully Modified release tag in library.properties file...
+          sed -i -E "s/(version=).*/\1${LATEST_TAG}/" library.properties
+          jq ".version = \"${LATEST_TAG}\"" library.json > temp.json && mv temp.json library.json
       - name: Publish to PlatformIO
         env:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
@@ -52,6 +47,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-tags: true
+          fetch-depth: 0
       - name: Update library versions
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0)
