@@ -18,7 +18,7 @@
     ],
     "license": "MIT",
     "homepage": "https://github.com/AlexandreHiroyuki/DataTome",
-    "frameworks": "arduino",
+    "frameworks": "*",
     "platforms": "*",
     "headers": [
         "DataTome.h",
